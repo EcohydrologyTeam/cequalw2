@@ -1,0 +1,694 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Testing Guide &mdash; CE-QUAL-W2 Python Library v1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Contributing" href="contributing.html" />
+    <link rel="prev" title="Examples" href="examples.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            CE-QUAL-W2 Python Library
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Testing Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-structure">Test Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-tests">Running Tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#basic-test-execution">Basic Test Execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test-coverage">Test Coverage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#performance-testing">Performance Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#test-categories">Test Categories</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#unit-tests">Unit Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#integration-tests">Integration Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#fixture-examples">Fixture Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#common-test-data">Common Test Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameterized-tests">Parameterized Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#error-handling-tests">Error Handling Tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#testing-exception-cases">Testing Exception Cases</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#performance-tests">Performance Tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#benchmarking-critical-functions">Benchmarking Critical Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mock-and-patch-tests">Mock and Patch Tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#testing-external-dependencies">Testing External Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#test-configuration">Test Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pytest-ini-configuration">pytest.ini Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#coverage-configuration">Coverage Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#continuous-integration">Continuous Integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#github-actions-example">GitHub Actions Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#best-practices">Best Practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#writing-good-tests">Writing Good Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-of-well-structured-test">Example of Well-Structured Test</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#running-tests-in-development">Running Tests in Development</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pre-commit-testing">Pre-commit Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debugging-failed-tests">Debugging Failed Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#contributing-tests">Contributing Tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#test-review-checklist">Test Review Checklist</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CE-QUAL-W2 Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Testing Guide</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/ecohydrology/cequalw2-Claude/blob/main/docs_sphinx/testing.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="testing-guide">
+<h1>Testing Guide<a class="headerlink" href="#testing-guide" title="Link to this heading"></a></h1>
+<p>This guide covers testing practices for the CE-QUAL-W2 Python Library.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For detailed testing information and examples, see the
+<a class="reference external" href="https://github.com/ecohydrology/cequalw2-Claude/blob/main/docs/TESTING.md">TESTING.md</a>
+file in the documentation directory.</p>
+</div>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>The CE-QUAL-W2 Python Library uses pytest as its testing framework. The test suite is designed to:</p>
+<ul class="simple">
+<li><p>Ensure all functions work correctly with various inputs</p></li>
+<li><p>Validate data integrity and conversion accuracy</p></li>
+<li><p>Test file I/O operations with different formats</p></li>
+<li><p>Verify visualization functionality</p></li>
+<li><p>Check error handling and edge cases</p></li>
+</ul>
+</section>
+<section id="test-structure">
+<h2>Test Structure<a class="headerlink" href="#test-structure" title="Link to this heading"></a></h2>
+<p>The test suite is organized in the <code class="docutils literal notranslate"><span class="pre">tests/</span></code> directory:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>tests/
+├── test_datetime.py          # Date/time conversion tests
+├── test_fileio.py           # File I/O operations tests
+├── test_visualization.py    # Plotting and visualization tests
+├── test_analysis.py         # Analysis and statistics tests
+├── test_integration.py      # Integration tests
+├── fixtures/                # Test data files
+│   ├── sample_csv.csv
+│   ├── sample_npt.npt
+│   └── sample_excel.xlsx
+└── conftest.py              # Pytest configuration and fixtures
+</pre></div>
+</div>
+</section>
+<section id="running-tests">
+<h2>Running Tests<a class="headerlink" href="#running-tests" title="Link to this heading"></a></h2>
+<section id="basic-test-execution">
+<h3>Basic Test Execution<a class="headerlink" href="#basic-test-execution" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run all tests</span>
+pytest
+
+<span class="c1"># Run with verbose output</span>
+pytest<span class="w"> </span>-v
+
+<span class="c1"># Run specific test file</span>
+pytest<span class="w"> </span>tests/test_datetime.py
+
+<span class="c1"># Run specific test function</span>
+pytest<span class="w"> </span>tests/test_datetime.py::test_single_day_conversion
+</pre></div>
+</div>
+</section>
+<section id="test-coverage">
+<h3>Test Coverage<a class="headerlink" href="#test-coverage" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run tests with coverage report</span>
+pytest<span class="w"> </span>--cov<span class="o">=</span>cequalw2
+
+<span class="c1"># Generate HTML coverage report</span>
+pytest<span class="w"> </span>--cov<span class="o">=</span>cequalw2<span class="w"> </span>--cov-report<span class="o">=</span>html
+
+<span class="c1"># View coverage in browser</span>
+open<span class="w"> </span>htmlcov/index.html
+</pre></div>
+</div>
+</section>
+<section id="performance-testing">
+<h3>Performance Testing<a class="headerlink" href="#performance-testing" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run performance tests only</span>
+pytest<span class="w"> </span>-m<span class="w"> </span>performance
+
+<span class="c1"># Run with timing information</span>
+pytest<span class="w"> </span>--durations<span class="o">=</span><span class="m">10</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="test-categories">
+<h2>Test Categories<a class="headerlink" href="#test-categories" title="Link to this heading"></a></h2>
+<section id="unit-tests">
+<h3>Unit Tests<a class="headerlink" href="#unit-tests" title="Link to this heading"></a></h3>
+<p>Test individual functions in isolation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># test_datetime.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">day_of_year_to_date</span><span class="p">,</span> <span class="n">round_time</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestDateConversion</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test date conversion utilities.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_single_day_conversion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test conversion of single day-of-year value.&quot;&quot;&quot;</span>
+        <span class="n">dates</span> <span class="o">=</span> <span class="n">day_of_year_to_date</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">])</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">expected</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_fractional_day_conversion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test conversion with fractional day (time).&quot;&quot;&quot;</span>
+        <span class="n">dates</span> <span class="o">=</span> <span class="n">day_of_year_to_date</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.5</span><span class="p">])</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">expected</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_leap_year_handling</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test proper leap year handling.&quot;&quot;&quot;</span>
+        <span class="c1"># Day 366 should work in leap year</span>
+        <span class="n">dates</span> <span class="o">=</span> <span class="n">day_of_year_to_date</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="p">[</span><span class="mf">366.0</span><span class="p">])</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">expected</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_invalid_day_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test error handling for invalid day values.&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="n">day_of_year_to_date</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="p">[</span><span class="mf">367.0</span><span class="p">])</span>  <span class="c1"># Too high for regular year</span>
+</pre></div>
+</div>
+</section>
+<section id="integration-tests">
+<h3>Integration Tests<a class="headerlink" href="#integration-tests" title="Link to this heading"></a></h3>
+<p>Test complete workflows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># test_integration.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.fileio</span><span class="w"> </span><span class="kn">import</span> <span class="n">read</span><span class="p">,</span> <span class="n">write_csv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestWorkflowIntegration</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test complete analysis workflows.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_csv_roundtrip</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test reading and writing CSV files.&quot;&quot;&quot;</span>
+        <span class="c1"># Create sample data</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+            <span class="s1">&#39;temperature&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">15.0</span><span class="p">,</span> <span class="mf">16.0</span><span class="p">,</span> <span class="mf">17.0</span><span class="p">],</span>
+            <span class="s1">&#39;do&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">8.0</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">]</span>
+        <span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2023-01-01&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">))</span>
+
+        <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmpdir</span><span class="p">:</span>
+            <span class="c1"># Write data</span>
+            <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">,</span> <span class="s1">&#39;test.csv&#39;</span><span class="p">)</span>
+            <span class="n">write_csv</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2023</span><span class="p">)</span>
+
+            <span class="c1"># Read data back</span>
+            <span class="n">read_data</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2023</span><span class="p">,</span>
+                           <span class="n">data_columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;do&#39;</span><span class="p">])</span>
+
+            <span class="c1"># Verify data integrity</span>
+            <span class="n">pd</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_frame_equal</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">read_data</span><span class="p">,</span> <span class="n">check_exact</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_plotting_workflow</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test complete plotting workflow.&quot;&quot;&quot;</span>
+        <span class="c1"># Sample data</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+            <span class="s1">&#39;temp&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span>
+            <span class="s1">&#39;do&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mf">6.5</span><span class="p">]</span>
+        <span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2023-01-01&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">))</span>
+
+        <span class="c1"># Should not raise any exceptions</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Test Parameters&#39;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">fig</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+        <span class="c1"># Clean up</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="fixture-examples">
+<h2>Fixture Examples<a class="headerlink" href="#fixture-examples" title="Link to this heading"></a></h2>
+<section id="common-test-data">
+<h3>Common Test Data<a class="headerlink" href="#common-test-data" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># conftest.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sample_data</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create sample water quality data.&quot;&quot;&quot;</span>
+    <span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2023-01-01&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="s1">&#39;temperature&#39;</span><span class="p">:</span> <span class="mi">15</span> <span class="o">+</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">365</span><span class="p">),</span>
+        <span class="s1">&#39;dissolved_oxygen&#39;</span><span class="p">:</span> <span class="mi">8</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">365</span><span class="p">),</span>
+        <span class="s1">&#39;ph&#39;</span><span class="p">:</span> <span class="mf">7.5</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="n">dates</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">temp_csv_file</span><span class="p">(</span><span class="n">sample_data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create temporary CSV file with sample data.&quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.csv&#39;</span><span class="p">,</span>
+                                   <span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="c1"># Write CE-QUAL-W2 style header</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;CE-QUAL-W2 Test Data</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Generated for testing</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Day,Temperature,DO,pH</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Write data with day-of-year format</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample_data</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()):</span>
+            <span class="n">day_of_year</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">timetuple</span><span class="p">()</span><span class="o">.</span><span class="n">tm_yday</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">day_of_year</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">,&quot;</span>
+                   <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;dissolved_oxygen&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;ph&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">yield</span> <span class="n">f</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="c1"># Cleanup</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="parameterized-tests">
+<h3>Parameterized Tests<a class="headerlink" href="#parameterized-tests" title="Link to this heading"></a></h3>
+<p>Test multiple scenarios efficiently:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;year,expected_days&quot;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">365</span><span class="p">),</span>  <span class="c1"># Regular year</span>
+    <span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">366</span><span class="p">),</span>  <span class="c1"># Leap year</span>
+    <span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">366</span><span class="p">),</span>  <span class="c1"># Leap year (divisible by 400)</span>
+    <span class="p">(</span><span class="mi">1900</span><span class="p">,</span> <span class="mi">365</span><span class="p">),</span>  <span class="c1"># Not leap year (divisible by 100, not 400)</span>
+<span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_year_length</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">expected_days</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test correct handling of different year lengths.&quot;&quot;&quot;</span>
+    <span class="n">max_day</span> <span class="o">=</span> <span class="n">expected_days</span>
+    <span class="n">dates</span> <span class="o">=</span> <span class="n">day_of_year_to_date</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="p">[</span><span class="n">max_day</span><span class="p">])</span>
+    <span class="k">assert</span> <span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="n">year</span>
+    <span class="k">assert</span> <span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">month</span> <span class="o">==</span> <span class="mi">12</span>
+    <span class="k">assert</span> <span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">day</span> <span class="o">==</span> <span class="mi">31</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;file_extension,expected_type&quot;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s1">&#39;.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;CSV&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;.npt&#39;</span><span class="p">,</span> <span class="s1">&#39;FIXED_WIDTH&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;.opt&#39;</span><span class="p">,</span> <span class="s1">&#39;FIXED_WIDTH&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;.xlsx&#39;</span><span class="p">,</span> <span class="s1">&#39;EXCEL&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;.db&#39;</span><span class="p">,</span> <span class="s1">&#39;SQLITE&#39;</span><span class="p">),</span>
+<span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_file_type_detection</span><span class="p">(</span><span class="n">file_extension</span><span class="p">,</span> <span class="n">expected_type</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test automatic file type detection.&quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.fileio</span><span class="w"> </span><span class="kn">import</span> <span class="n">detect_file_type</span>
+
+    <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;test</span><span class="si">{</span><span class="n">file_extension</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">detected_type</span> <span class="o">=</span> <span class="n">detect_file_type</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">detected_type</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="n">expected_type</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="error-handling-tests">
+<h2>Error Handling Tests<a class="headerlink" href="#error-handling-tests" title="Link to this heading"></a></h2>
+<section id="testing-exception-cases">
+<h3>Testing Exception Cases<a class="headerlink" href="#testing-exception-cases" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TestErrorHandling</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test error handling and edge cases.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_file_not_found</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test handling of missing files.&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">FileNotFoundError</span><span class="p">):</span>
+            <span class="n">read</span><span class="p">(</span><span class="s1">&#39;nonexistent_file.csv&#39;</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2023</span><span class="p">,</span> <span class="n">data_columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;temp&#39;</span><span class="p">])</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_invalid_year</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test handling of invalid year values.&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="n">day_of_year_to_date</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">])</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_empty_data_columns</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test handling of empty column list.&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="n">read</span><span class="p">(</span><span class="s1">&#39;sample.csv&#39;</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2023</span><span class="p">,</span> <span class="n">data_columns</span><span class="o">=</span><span class="p">[])</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_missing_columns</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temp_csv_file</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test handling of missing columns in file.&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">KeyError</span><span class="p">):</span>
+            <span class="n">read</span><span class="p">(</span><span class="n">temp_csv_file</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2023</span><span class="p">,</span>
+                 <span class="n">data_columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nonexistent_column&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="performance-tests">
+<h2>Performance Tests<a class="headerlink" href="#performance-tests" title="Link to this heading"></a></h2>
+<section id="benchmarking-critical-functions">
+<h3>Benchmarking Critical Functions<a class="headerlink" href="#benchmarking-critical-functions" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">performance</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TestPerformance</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Performance tests for critical functions.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_large_date_conversion_performance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test performance of date conversion with large datasets.&quot;&quot;&quot;</span>
+        <span class="c1"># Create large dataset</span>
+        <span class="n">large_day_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">365</span><span class="p">,</span> <span class="mi">100000</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">dates</span> <span class="o">=</span> <span class="n">day_of_year_to_date</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="n">large_day_values</span><span class="p">)</span>
+        <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+        <span class="c1"># Should complete within reasonable time (adjust threshold as needed)</span>
+        <span class="k">assert</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span> <span class="o">&lt;</span> <span class="mf">5.0</span>  <span class="c1"># 5 seconds</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">large_day_values</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_large_file_reading_performance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test performance of reading large files.&quot;&quot;&quot;</span>
+        <span class="c1"># This would require creating or using large test files</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="mock-and-patch-tests">
+<h2>Mock and Patch Tests<a class="headerlink" href="#mock-and-patch-tests" title="Link to this heading"></a></h2>
+<section id="testing-external-dependencies">
+<h3>Testing External Dependencies<a class="headerlink" href="#testing-external-dependencies" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">unittest.mock</span><span class="w"> </span><span class="kn">import</span> <span class="n">patch</span><span class="p">,</span> <span class="n">mock_open</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestMocking</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test using mocks for external dependencies.&quot;&quot;&quot;</span>
+
+    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;pandas.read_csv&#39;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_csv_reading_with_mock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_read_csv</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test CSV reading function using mocked pandas.&quot;&quot;&quot;</span>
+        <span class="c1"># Setup mock return value</span>
+        <span class="n">mock_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+            <span class="s1">&#39;day_of_year&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">],</span>
+            <span class="s1">&#39;temperature&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">15.0</span><span class="p">,</span> <span class="mf">16.0</span><span class="p">,</span> <span class="mf">17.0</span><span class="p">]</span>
+        <span class="p">})</span>
+        <span class="n">mock_read_csv</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">mock_data</span>
+
+        <span class="c1"># Test function</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.fileio</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_csv</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;dummy.csv&#39;</span><span class="p">,</span> <span class="n">data_columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">])</span>
+
+        <span class="c1"># Verify mock was called correctly</span>
+        <span class="n">mock_read_csv</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="s1">&#39;temperature&#39;</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">columns</span>
+
+    <span class="nd">@patch</span><span class="p">(</span><span class="s1">&#39;matplotlib.pyplot.savefig&#39;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_plot_saving_with_mock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mock_savefig</span><span class="p">,</span> <span class="n">sample_data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test plot saving using mocked matplotlib.&quot;&quot;&quot;</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot</span>
+
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">sample_data</span><span class="p">)</span>
+
+        <span class="c1"># Verify savefig would be called if we called it</span>
+        <span class="c1"># (This tests the plot creation, not actual file saving)</span>
+        <span class="k">assert</span> <span class="n">fig</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="test-configuration">
+<h2>Test Configuration<a class="headerlink" href="#test-configuration" title="Link to this heading"></a></h2>
+<section id="pytest-ini-configuration">
+<h3>pytest.ini Configuration<a class="headerlink" href="#pytest-ini-configuration" title="Link to this heading"></a></h3>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># pytest.ini</span>
+<span class="k">[tool:pytest]</span>
+<span class="na">testpaths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">tests</span>
+<span class="na">python_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">test_*.py</span>
+<span class="na">python_classes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">Test*</span>
+<span class="na">python_functions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">test_*</span>
+<span class="na">addopts</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="na">--verbose</span>
+<span class="w">    </span><span class="na">--strict-markers</span>
+<span class="w">    </span><span class="na">--disable-warnings</span>
+<span class="na">markers</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="na">unit</span><span class="o">:</span><span class="w"> </span><span class="s">Unit tests</span>
+<span class="w">    </span><span class="na">integration</span><span class="o">:</span><span class="w"> </span><span class="s">Integration tests</span>
+<span class="w">    </span><span class="na">performance</span><span class="o">:</span><span class="w"> </span><span class="s">Performance tests</span>
+<span class="w">    </span><span class="na">slow</span><span class="o">:</span><span class="w"> </span><span class="s">Slow tests that can be skipped</span>
+</pre></div>
+</div>
+</section>
+<section id="coverage-configuration">
+<h3>Coverage Configuration<a class="headerlink" href="#coverage-configuration" title="Link to this heading"></a></h3>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># .coveragerc</span>
+<span class="k">[run]</span>
+<span class="na">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">cequalw2</span>
+<span class="na">omit</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="na">*/tests/*</span>
+<span class="w">    </span><span class="na">*/venv/*</span>
+<span class="w">    </span><span class="na">*/env/*</span>
+<span class="w">    </span><span class="na">setup.py</span>
+
+<span class="k">[report]</span>
+<span class="na">exclude_lines</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="na">pragma</span><span class="o">:</span><span class="w"> </span><span class="s">no cover</span>
+<span class="w">    </span><span class="na">def __repr__</span>
+<span class="w">    </span><span class="na">raise AssertionError</span>
+<span class="w">    </span><span class="na">raise NotImplementedError</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="continuous-integration">
+<h2>Continuous Integration<a class="headerlink" href="#continuous-integration" title="Link to this heading"></a></h2>
+<section id="github-actions-example">
+<h3>GitHub Actions Example<a class="headerlink" href="#github-actions-example" title="Link to this heading"></a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># .github/workflows/tests.yml</span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Tests</span>
+
+<span class="nt">on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">push</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">pull_request</span><span class="p p-Indicator">]</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">test</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">strategy</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">matrix</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">python-version</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">3.7</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.8</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.9</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;3.10&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;3.11&#39;</span><span class="p p-Indicator">]</span>
+
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v3</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Set up Python ${{ matrix.python-version }}</span>
+<span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-python@v4</span>
+<span class="w">      </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">python-version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ matrix.python-version }}</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install dependencies</span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">python -m pip install --upgrade pip</span>
+<span class="w">        </span><span class="no">pip install -e .[dev]</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run tests</span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">pytest --cov=cequalw2 --cov-report=xml</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Upload coverage to Codecov</span>
+<span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">codecov/codecov-action@v3</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading"></a></h2>
+<section id="writing-good-tests">
+<h3>Writing Good Tests<a class="headerlink" href="#writing-good-tests" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>Test Naming</strong>: Use descriptive names that explain what is being tested</p></li>
+<li><p><strong>Test Structure</strong>: Follow Arrange-Act-Assert pattern</p></li>
+<li><p><strong>Independence</strong>: Tests should not depend on each other</p></li>
+<li><p><strong>Coverage</strong>: Aim for high code coverage but focus on critical paths</p></li>
+<li><p><strong>Speed</strong>: Keep tests fast; use mocks for slow operations</p></li>
+</ol>
+</section>
+<section id="example-of-well-structured-test">
+<h3>Example of Well-Structured Test<a class="headerlink" href="#example-of-well-structured-test" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_temperature_data_validation_with_valid_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test that temperature validation passes for realistic values.&quot;&quot;&quot;</span>
+    <span class="c1"># Arrange</span>
+    <span class="n">valid_temps</span> <span class="o">=</span> <span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">,</span> <span class="mf">30.0</span><span class="p">]</span>  <span class="c1"># Realistic water temperatures</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;temperature&#39;</span><span class="p">:</span> <span class="n">valid_temps</span><span class="p">})</span>
+
+    <span class="c1"># Act</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">validate_temperature_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="c1"># Assert</span>
+    <span class="k">assert</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;is_valid&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">True</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;issues&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="k">assert</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;validated_data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="running-tests-in-development">
+<h2>Running Tests in Development<a class="headerlink" href="#running-tests-in-development" title="Link to this heading"></a></h2>
+<section id="pre-commit-testing">
+<h3>Pre-commit Testing<a class="headerlink" href="#pre-commit-testing" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run quick tests before committing</span>
+pytest<span class="w"> </span>tests/test_datetime.py<span class="w"> </span>tests/test_fileio.py<span class="w"> </span>-v
+
+<span class="c1"># Run all tests except slow ones</span>
+pytest<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;not slow&quot;</span>
+
+<span class="c1"># Run with coverage for development</span>
+pytest<span class="w"> </span>--cov<span class="o">=</span>cequalw2<span class="w"> </span>--cov-report<span class="o">=</span>term-missing
+</pre></div>
+</div>
+</section>
+<section id="debugging-failed-tests">
+<h3>Debugging Failed Tests<a class="headerlink" href="#debugging-failed-tests" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run failed tests only</span>
+pytest<span class="w"> </span>--lf
+
+<span class="c1"># Run with debugging on first failure</span>
+pytest<span class="w"> </span>-x<span class="w"> </span>--pdb
+
+<span class="c1"># Run with more verbose output</span>
+pytest<span class="w"> </span>-vv<span class="w"> </span>-s
+</pre></div>
+</div>
+</section>
+</section>
+<section id="contributing-tests">
+<h2>Contributing Tests<a class="headerlink" href="#contributing-tests" title="Link to this heading"></a></h2>
+<p>When adding new features, include:</p>
+<ol class="arabic simple">
+<li><p><strong>Unit tests</strong> for individual functions</p></li>
+<li><p><strong>Integration tests</strong> for complete workflows</p></li>
+<li><p><strong>Error handling tests</strong> for edge cases</p></li>
+<li><p><strong>Performance tests</strong> for critical code paths</p></li>
+<li><p><strong>Documentation</strong> explaining test purpose</p></li>
+</ol>
+<section id="test-review-checklist">
+<h3>Test Review Checklist<a class="headerlink" href="#test-review-checklist" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>[ ] All new code has corresponding tests</p></li>
+<li><p>[ ] Tests cover both success and failure cases</p></li>
+<li><p>[ ] Tests are independent and can run in any order</p></li>
+<li><p>[ ] Test names clearly describe what is being tested</p></li>
+<li><p>[ ] Tests run quickly (&lt; 1 second each for unit tests)</p></li>
+<li><p>[ ] Mock external dependencies appropriately</p></li>
+<li><p>[ ] Update test documentation as needed</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="examples.html" class="btn btn-neutral float-left" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="contributing.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Todd E. Steissberg, PhD, PE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

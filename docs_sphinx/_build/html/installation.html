@@ -1,0 +1,393 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installation &mdash; CE-QUAL-W2 Python Library v1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Quick Start Guide" href="quickstart.html" />
+    <link rel="prev" title="CE-QUAL-W2 Python Library Documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            CE-QUAL-W2 Python Library
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#required-dependencies">Required Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optional-dependencies">Optional Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-methods">Installation Methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#from-source-recommended-for-development">From Source (Recommended for Development)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#from-pypi-when-available">From PyPI (When Available)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#virtual-environment-setup">Virtual Environment Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-venv-python-3-3">Using venv (Python 3.3+)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-conda">Using conda</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#verification">Verification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-troubleshooting">Installation Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#common-issues">Common Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#platform-specific-notes">Platform-Specific Notes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#windows">Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#macos">macOS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linux">Linux</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#development-installation">Development Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#docker-installation">Docker Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#updating">Updating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-help">Getting Help</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CE-QUAL-W2 Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Installation</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/ecohydrology/cequalw2-Claude/blob/main/docs_sphinx/installation.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
+<p>This guide covers the installation process for the CE-QUAL-W2 Python Library.</p>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Python 3.7 or higher</p></li>
+<li><p>pip package manager</p></li>
+</ul>
+</section>
+<section id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading"></a></h2>
+<p>The library depends on the following Python packages:</p>
+<section id="required-dependencies">
+<h3>Required Dependencies<a class="headerlink" href="#required-dependencies" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>pandas &gt;= 1.0.0 - Data manipulation and analysis</p></li>
+<li><p>numpy &gt;= 1.18.0 - Numerical computing</p></li>
+<li><p>matplotlib &gt;= 3.0.0 - Plotting and visualization</p></li>
+<li><p>seaborn &gt;= 0.11.0 - Statistical data visualization</p></li>
+</ul>
+</section>
+<section id="optional-dependencies">
+<h3>Optional Dependencies<a class="headerlink" href="#optional-dependencies" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>holoviews &gt;= 1.14.0 - Interactive visualizations</p></li>
+<li><p>bokeh &gt;= 2.0.0 - Interactive plotting backend</p></li>
+<li><p>openpyxl &gt;= 3.0.0 - Excel file support</p></li>
+<li><p>h5py &gt;= 2.10.0 - HDF5 file support</p></li>
+<li><p>PyYAML &gt;= 5.0.0 - YAML configuration file support</p></li>
+<li><p>pandoc - For PDF report generation</p></li>
+</ul>
+</section>
+</section>
+<section id="installation-methods">
+<h2>Installation Methods<a class="headerlink" href="#installation-methods" title="Link to this heading"></a></h2>
+<section id="from-source-recommended-for-development">
+<h3>From Source (Recommended for Development)<a class="headerlink" href="#from-source-recommended-for-development" title="Link to this heading"></a></h3>
+<p>If you plan to modify the code or contribute to the project:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clone the repository</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ecohydrology/cequalw2-Claude.git
+<span class="nb">cd</span><span class="w"> </span>cequalw2-Claude
+
+<span class="c1"># Create virtual environment (recommended)</span>
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+<span class="nb">source</span><span class="w"> </span>venv/bin/activate<span class="w">  </span><span class="c1"># On Windows: venv\Scripts\activate</span>
+
+<span class="c1"># Install in development mode</span>
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+
+<span class="c1"># Install development dependencies (optional)</span>
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements-dev.txt
+</pre></div>
+</div>
+</section>
+<section id="from-pypi-when-available">
+<h3>From PyPI (When Available)<a class="headerlink" href="#from-pypi-when-available" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>cequalw2
+</pre></div>
+</div>
+</section>
+</section>
+<section id="virtual-environment-setup">
+<h2>Virtual Environment Setup<a class="headerlink" href="#virtual-environment-setup" title="Link to this heading"></a></h2>
+<p>It’s recommended to use a virtual environment to avoid conflicts with other packages:</p>
+<section id="using-venv-python-3-3">
+<h3>Using venv (Python 3.3+)<a class="headerlink" href="#using-venv-python-3-3" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create virtual environment</span>
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>cequalw2_env
+
+<span class="c1"># Activate virtual environment</span>
+<span class="c1"># On Linux/macOS:</span>
+<span class="nb">source</span><span class="w"> </span>cequalw2_env/bin/activate
+<span class="c1"># On Windows:</span>
+cequalw2_env<span class="se">\S</span>cripts<span class="se">\a</span>ctivate
+
+<span class="c1"># Install the library</span>
+pip<span class="w"> </span>install<span class="w"> </span>cequalw2
+</pre></div>
+</div>
+</section>
+<section id="using-conda">
+<h3>Using conda<a class="headerlink" href="#using-conda" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create conda environment</span>
+conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>cequalw2<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.9
+conda<span class="w"> </span>activate<span class="w"> </span>cequalw2
+
+<span class="c1"># Install dependencies</span>
+conda<span class="w"> </span>install<span class="w"> </span>pandas<span class="w"> </span>matplotlib<span class="w"> </span>seaborn<span class="w"> </span>numpy
+
+<span class="c1"># Install the library</span>
+pip<span class="w"> </span>install<span class="w"> </span>cequalw2
+</pre></div>
+</div>
+</section>
+</section>
+<section id="verification">
+<h2>Verification<a class="headerlink" href="#verification" title="Link to this heading"></a></h2>
+<p>To verify that the installation was successful:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">cequalw2</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CE-QUAL-W2 Python Library version: </span><span class="si">{</span><span class="n">cequalw2</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Test basic functionality</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">day_of_year_to_date</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="n">day_of_year_to_date</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">91.5</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test successful: </span><span class="si">{</span><span class="n">dates</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="installation-troubleshooting">
+<h2>Installation Troubleshooting<a class="headerlink" href="#installation-troubleshooting" title="Link to this heading"></a></h2>
+<section id="common-issues">
+<h3>Common Issues<a class="headerlink" href="#common-issues" title="Link to this heading"></a></h3>
+<p><strong>Import Error: No module named ‘cequalw2’</strong></p>
+<ul class="simple">
+<li><p>Ensure you’ve activated the correct virtual environment</p></li>
+<li><p>Try reinstalling: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">uninstall</span> <span class="pre">cequalw2</span> <span class="pre">&amp;&amp;</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">cequalw2</span></code></p></li>
+<li><p>For development installation, use <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.</span></code> in the project directory</p></li>
+</ul>
+<p><strong>Missing Dependencies</strong></p>
+<p>If you encounter missing dependency errors:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install all required dependencies</span>
+pip<span class="w"> </span>install<span class="w"> </span>pandas<span class="w"> </span>numpy<span class="w"> </span>matplotlib<span class="w"> </span>seaborn
+
+<span class="c1"># For optional features</span>
+pip<span class="w"> </span>install<span class="w"> </span>holoviews<span class="w"> </span>bokeh<span class="w"> </span>openpyxl<span class="w"> </span>h5py<span class="w"> </span>PyYAML
+</pre></div>
+</div>
+<p><strong>Permission Errors</strong></p>
+<p>On some systems, you might need to use <code class="docutils literal notranslate"><span class="pre">--user</span></code> flag:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>cequalw2
+</pre></div>
+</div>
+<p><strong>Windows-specific Issues</strong></p>
+<ul class="simple">
+<li><p>Install Microsoft Visual C++ Build Tools if you encounter compilation errors</p></li>
+<li><p>Use Anaconda or Miniconda for easier dependency management on Windows</p></li>
+</ul>
+</section>
+</section>
+<section id="platform-specific-notes">
+<h2>Platform-Specific Notes<a class="headerlink" href="#platform-specific-notes" title="Link to this heading"></a></h2>
+<section id="windows">
+<h3>Windows<a class="headerlink" href="#windows" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Consider using Anaconda for easier package management</p></li>
+<li><p>Some plotting features may require additional configuration</p></li>
+</ul>
+</section>
+<section id="macos">
+<h3>macOS<a class="headerlink" href="#macos" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>No special requirements beyond standard Python installation</p></li>
+<li><p>Homebrew Python is recommended over system Python</p></li>
+</ul>
+</section>
+<section id="linux">
+<h3>Linux<a class="headerlink" href="#linux" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Most distributions work out of the box</p></li>
+<li><p>May need to install python3-dev for some dependencies:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ubuntu/Debian</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>python3-dev
+
+<span class="c1"># CentOS/RHEL</span>
+sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>python3-devel
+</pre></div>
+</div>
+</section>
+</section>
+<section id="development-installation">
+<h2>Development Installation<a class="headerlink" href="#development-installation" title="Link to this heading"></a></h2>
+<p>For contributors and developers:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clone and enter directory</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ecohydrology/cequalw2-Claude.git
+<span class="nb">cd</span><span class="w"> </span>cequalw2-Claude
+
+<span class="c1"># Install in development mode with all dependencies</span>
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[dev]&quot;</span>
+
+<span class="c1"># Or install development requirements separately</span>
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements-dev.txt
+
+<span class="c1"># Run tests to verify installation</span>
+pytest<span class="w"> </span>tests/
+
+<span class="c1"># Install pre-commit hooks (optional)</span>
+pre-commit<span class="w"> </span>install
+</pre></div>
+</div>
+</section>
+<section id="docker-installation">
+<h2>Docker Installation<a class="headerlink" href="#docker-installation" title="Link to this heading"></a></h2>
+<p>For containerized environments:</p>
+<div class="highlight-dockerfile notranslate"><div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">python:3.9-slim</span>
+
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+
+<span class="c"># Install system dependencies</span>
+<span class="k">RUN</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>git<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*
+
+<span class="c"># Install Python dependencies</span>
+<span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+
+<span class="c"># Install CE-QUAL-W2 library</span>
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>cequalw2
+
+<span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="updating">
+<h2>Updating<a class="headerlink" href="#updating" title="Link to this heading"></a></h2>
+<p>To update to the latest version:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># From PyPI</span>
+pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>cequalw2
+
+<span class="c1"># From source (development)</span>
+<span class="nb">cd</span><span class="w"> </span>cequalw2-Claude
+git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </span>main
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="getting-help">
+<h2>Getting Help<a class="headerlink" href="#getting-help" title="Link to this heading"></a></h2>
+<p>If you encounter installation issues:</p>
+<ol class="arabic simple">
+<li><p>Check the <a class="reference external" href="troubleshooting.html">troubleshooting section</a></p></li>
+<li><p>Search existing <a class="reference external" href="https://github.com/ecohydrology/cequalw2-Claude/issues">GitHub issues</a></p></li>
+<li><p>Create a new issue with:
+* Your operating system and Python version
+* Complete error message
+* Steps you’ve already tried</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="CE-QUAL-W2 Python Library Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="quickstart.html" class="btn btn-neutral float-right" title="Quick Start Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Todd E. Steissberg, PhD, PE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,893 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Guide &mdash; CE-QUAL-W2 Python Library v1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API Reference" href="api.html" />
+    <link rel="prev" title="Quick Start Guide" href="quickstart.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            CE-QUAL-W2 Python Library
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#core-concepts">Core Concepts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#file-types-and-formats">File Types and Formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#date-and-time-handling">Date and Time Handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-structure">Data Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#file-i-o-operations">File I/O Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#reading-files">Reading Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#format-specific-readers">Format-Specific Readers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#file-type-detection">File Type Detection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#writing-files">Writing Files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#date-and-time-operations">Date and Time Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#basic-conversion">Basic Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#leap-year-handling">Leap Year Handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#time-rounding">Time Rounding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#working-with-dataframes">Working with DataFrames</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data-visualization">Data Visualization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#basic-plotting">Basic Plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multiple-subplots">Multiple Subplots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#color-palettes">Color Palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#interactive-visualization">Interactive Visualization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#batch-plotting">Batch Plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#advanced-visualization">Advanced Visualization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data-analysis-and-statistics">Data Analysis and Statistics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#descriptive-statistics">Descriptive Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#temporal-analysis">Temporal Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#correlation-analysis">Correlation Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#quality-control">Quality Control</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#report-generation">Report Generation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#automated-reports">Automated Reports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#custom-reports">Custom Reports</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#database-operations">Database Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sqlite-integration">SQLite Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-databases">Creating Databases</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#performance-optimization">Performance Optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#memory-management">Memory Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parallel-processing">Parallel Processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#efficient-storage">Efficient Storage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#integration-with-other-libraries">Integration with Other Libraries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#scientific-python-ecosystem">Scientific Python Ecosystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#machine-learning">Machine Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gis-integration">GIS Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#best-practices">Best Practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#code-organization">Code Organization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#error-handling">Error Handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#documentation">Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#common-issues">Common Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-help">Getting Help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contributing">Contributing</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CE-QUAL-W2 Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">User Guide</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/ecohydrology/cequalw2-Claude/blob/main/docs_sphinx/user_guide.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="user-guide">
+<h1>User Guide<a class="headerlink" href="#user-guide" title="Link to this heading"></a></h1>
+<p>This comprehensive guide covers all aspects of using the CE-QUAL-W2 Python Library.</p>
+<div class="toctree-wrapper compound">
+</div>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>The CE-QUAL-W2 Python Library is designed to streamline the workflow for water quality modelers and researchers working with CE-QUAL-W2 output files. It provides tools for:</p>
+<ul class="simple">
+<li><p>Reading various file formats (CSV, NPT/OPT, Excel, SQLite, HDF5)</p></li>
+<li><p>Converting CE-QUAL-W2 date formats to Python datetime objects</p></li>
+<li><p>Creating publication-quality visualizations</p></li>
+<li><p>Performing statistical analysis and generating reports</p></li>
+<li><p>Exporting data in multiple formats</p></li>
+</ul>
+</section>
+<section id="core-concepts">
+<h2>Core Concepts<a class="headerlink" href="#core-concepts" title="Link to this heading"></a></h2>
+<section id="file-types-and-formats">
+<h3>File Types and Formats<a class="headerlink" href="#file-types-and-formats" title="Link to this heading"></a></h3>
+<p>CE-QUAL-W2 produces output in several formats:</p>
+<p><strong>CSV Files</strong>: Comma-separated values with day-of-year in the first column
+<strong>NPT/OPT Files</strong>: Fixed-width format files for model output
+<strong>Excel Files</strong>: Spreadsheet format for data exchange
+<strong>SQLite Databases</strong>: Structured database storage for large datasets
+<strong>HDF5 Files</strong>: High-performance format for scientific data</p>
+</section>
+<section id="date-and-time-handling">
+<h3>Date and Time Handling<a class="headerlink" href="#date-and-time-handling" title="Link to this heading"></a></h3>
+<p>CE-QUAL-W2 uses a day-of-year format where:</p>
+<ul class="simple">
+<li><p>January 1 = 1.0</p></li>
+<li><p>January 1, 12:00 PM = 1.5</p></li>
+<li><p>December 31 = 365.0 (or 366.0 in leap years)</p></li>
+</ul>
+<p>The library automatically converts these to Python datetime objects.</p>
+</section>
+<section id="data-structure">
+<h3>Data Structure<a class="headerlink" href="#data-structure" title="Link to this heading"></a></h3>
+<p>The library returns pandas DataFrames with:</p>
+<ul class="simple">
+<li><p><strong>Index</strong>: Datetime objects converted from day-of-year</p></li>
+<li><p><strong>Columns</strong>: Water quality parameters (temperature, dissolved oxygen, etc.)</p></li>
+<li><p><strong>Values</strong>: Numeric data from the model</p></li>
+</ul>
+</section>
+</section>
+<section id="file-i-o-operations">
+<h2>File I/O Operations<a class="headerlink" href="#file-i-o-operations" title="Link to this heading"></a></h2>
+<section id="reading-files">
+<h3>Reading Files<a class="headerlink" href="#reading-files" title="Link to this heading"></a></h3>
+<p>The main <code class="docutils literal notranslate"><span class="pre">read()</span></code> function automatically detects file format:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.fileio</span><span class="w"> </span><span class="kn">import</span> <span class="n">read</span>
+
+<span class="c1"># Automatic format detection</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="s1">&#39;output.csv&#39;</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2023</span><span class="p">,</span> <span class="n">data_columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span> <span class="s1">&#39;do&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="format-specific-readers">
+<h3>Format-Specific Readers<a class="headerlink" href="#format-specific-readers" title="Link to this heading"></a></h3>
+<p>For more control, use format-specific functions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.fileio</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_csv</span><span class="p">,</span> <span class="n">read_npt_opt</span><span class="p">,</span> <span class="n">read_excel</span><span class="p">,</span> <span class="n">read_sqlite</span>
+
+<span class="c1"># CSV files</span>
+<span class="n">csv_data</span> <span class="o">=</span> <span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;output.csv&#39;</span><span class="p">,</span> <span class="n">data_columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;temp&#39;</span><span class="p">],</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># Fixed-width files</span>
+<span class="n">npt_data</span> <span class="o">=</span> <span class="n">read_npt_opt</span><span class="p">(</span><span class="s1">&#39;output.npt&#39;</span><span class="p">,</span> <span class="n">data_columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span> <span class="s1">&#39;do&#39;</span><span class="p">])</span>
+
+<span class="c1"># Excel files</span>
+<span class="n">excel_data</span> <span class="o">=</span> <span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;data.xlsx&#39;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Results&#39;</span><span class="p">)</span>
+
+<span class="c1"># SQLite databases</span>
+<span class="n">db_data</span> <span class="o">=</span> <span class="n">read_sqlite</span><span class="p">(</span><span class="s1">&#39;results.db&#39;</span><span class="p">,</span> <span class="n">table_name</span><span class="o">=</span><span class="s1">&#39;output&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="file-type-detection">
+<h3>File Type Detection<a class="headerlink" href="#file-type-detection" title="Link to this heading"></a></h3>
+<p>The library uses several methods to detect file format:</p>
+<ol class="arabic simple">
+<li><p><strong>File Extension</strong>: .csv, .npt, .opt, .xlsx, .db, .h5</p></li>
+<li><p><strong>Content Analysis</strong>: Examining file structure and delimiters</p></li>
+<li><p><strong>User Specification</strong>: Explicit file_type parameter</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.fileio</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileType</span>
+
+<span class="c1"># Explicit format specification</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="s1">&#39;ambiguous_file.txt&#39;</span><span class="p">,</span>
+            <span class="n">year</span><span class="o">=</span><span class="mi">2023</span><span class="p">,</span>
+            <span class="n">data_columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;temp&#39;</span><span class="p">],</span>
+            <span class="n">file_type</span><span class="o">=</span><span class="n">FileType</span><span class="o">.</span><span class="n">CSV</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="writing-files">
+<h3>Writing Files<a class="headerlink" href="#writing-files" title="Link to this heading"></a></h3>
+<p>Export data in various formats:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">write_csv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.fileio</span><span class="w"> </span><span class="kn">import</span> <span class="n">write_hdf</span>
+
+<span class="c1"># CE-QUAL-W2 CSV format</span>
+<span class="n">write_csv</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;output.csv&#39;</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2023</span><span class="p">)</span>
+
+<span class="c1"># HDF5 format</span>
+<span class="n">write_hdf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s1">&#39;results&#39;</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="s1">&#39;data.h5&#39;</span><span class="p">)</span>
+
+<span class="c1"># Standard formats</span>
+<span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;standard.csv&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s1">&#39;data.xlsx&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="date-and-time-operations">
+<h2>Date and Time Operations<a class="headerlink" href="#date-and-time-operations" title="Link to this heading"></a></h2>
+<section id="basic-conversion">
+<h3>Basic Conversion<a class="headerlink" href="#basic-conversion" title="Link to this heading"></a></h3>
+<p>Convert day-of-year values to datetime objects:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">day_of_year_to_date</span>
+
+<span class="c1"># Single values</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="n">day_of_year_to_date</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">91.5</span><span class="p">,</span> <span class="mf">182.0</span><span class="p">])</span>
+
+<span class="c1"># Handle fractional days (time of day)</span>
+<span class="n">noon_jan1</span> <span class="o">=</span> <span class="n">day_of_year_to_date</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.5</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Jan 1, 12:00 PM</span>
+</pre></div>
+</div>
+</section>
+<section id="leap-year-handling">
+<h3>Leap Year Handling<a class="headerlink" href="#leap-year-handling" title="Link to this heading"></a></h3>
+<p>The library correctly handles leap years:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Regular year (365 days)</span>
+<span class="n">end_2023</span> <span class="o">=</span> <span class="n">day_of_year_to_date</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="p">[</span><span class="mf">365.0</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Leap year (366 days)</span>
+<span class="n">end_2024</span> <span class="o">=</span> <span class="n">day_of_year_to_date</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="p">[</span><span class="mf">366.0</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># February 29 in leap year</span>
+<span class="n">feb29</span> <span class="o">=</span> <span class="n">day_of_year_to_date</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="p">[</span><span class="mf">60.0</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="time-rounding">
+<h3>Time Rounding<a class="headerlink" href="#time-rounding" title="Link to this heading"></a></h3>
+<p>Round datetime objects to specific intervals:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">round_time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+
+<span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">23</span><span class="p">)</span>
+
+<span class="c1"># Round to nearest hour</span>
+<span class="n">rounded_hour</span> <span class="o">=</span> <span class="n">round_time</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">round_to</span><span class="o">=</span><span class="mi">3600</span><span class="p">)</span>
+
+<span class="c1"># Round to nearest 15 minutes</span>
+<span class="n">rounded_15min</span> <span class="o">=</span> <span class="n">round_time</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">round_to</span><span class="o">=</span><span class="mi">900</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="working-with-dataframes">
+<h3>Working with DataFrames<a class="headerlink" href="#working-with-dataframes" title="Link to this heading"></a></h3>
+<p>Convert existing DataFrame columns:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># DataFrame with day-of-year column</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;day_of_year&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">32.5</span><span class="p">,</span> <span class="mf">60.25</span><span class="p">,</span> <span class="mf">91.0</span><span class="p">],</span>
+    <span class="s1">&#39;temperature&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">4.2</span><span class="p">,</span> <span class="mf">6.8</span><span class="p">,</span> <span class="mf">12.1</span><span class="p">,</span> <span class="mf">18.5</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="c1"># Convert to datetime index</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="n">day_of_year_to_date</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;day_of_year&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">dates</span>
+<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;day_of_year&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="data-visualization">
+<h2>Data Visualization<a class="headerlink" href="#data-visualization" title="Link to this heading"></a></h2>
+<section id="basic-plotting">
+<h3>Basic Plotting<a class="headerlink" href="#basic-plotting" title="Link to this heading"></a></h3>
+<p>Create simple line plots:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot</span><span class="p">,</span> <span class="n">simple_plot</span>
+
+<span class="c1"># Plot all variables</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Water Quality Parameters&#39;</span><span class="p">)</span>
+
+<span class="c1"># Single variable</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">simple_plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">],</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Temperature (°C)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="multiple-subplots">
+<h3>Multiple Subplots<a class="headerlink" href="#multiple-subplots" title="Link to this heading"></a></h3>
+<p>Create separate subplots for each variable:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">multi_plot</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">multi_plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span>
+                 <span class="n">ylabels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Temperature (°C)&#39;</span><span class="p">,</span> <span class="s1">&#39;DO (mg/L)&#39;</span><span class="p">],</span>
+                 <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Water Quality Time Series&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="color-palettes">
+<h3>Color Palettes<a class="headerlink" href="#color-palettes" title="Link to this heading"></a></h3>
+<p>Use built-in or custom color schemes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">k2</span><span class="p">,</span> <span class="n">rainbow</span><span class="p">,</span> <span class="n">everest</span>
+
+<span class="c1"># Built-in palettes</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="n">k2</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="n">rainbow</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="n">everest</span><span class="p">)</span>
+
+<span class="c1"># Custom colors</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">])</span>
+
+<span class="c1"># Seaborn palettes</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">multi_plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="interactive-visualization">
+<h3>Interactive Visualization<a class="headerlink" href="#interactive-visualization" title="Link to this heading"></a></h3>
+<p>Create interactive plots with HoloViews:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">hv_plot</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">holoviews</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">hv</span>
+
+<span class="c1"># Create interactive curves</span>
+<span class="n">curves</span><span class="p">,</span> <span class="n">tooltips</span> <span class="o">=</span> <span class="n">hv_plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1200</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+
+<span class="c1"># Display individual curves</span>
+<span class="n">curves</span><span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">]</span>
+
+<span class="c1"># Combine multiple curves</span>
+<span class="n">overlay</span> <span class="o">=</span> <span class="n">hv</span><span class="o">.</span><span class="n">Overlay</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">curves</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+</pre></div>
+</div>
+</section>
+<section id="batch-plotting">
+<h3>Batch Plotting<a class="headerlink" href="#batch-plotting" title="Link to this heading"></a></h3>
+<p>Generate multiple plots from configuration:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_all_files</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.fileio</span><span class="w"> </span><span class="kn">import</span> <span class="n">write_plot_control</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Create plot configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Filename&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;temp.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;do.csv&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Columns&#39;</span><span class="p">:</span> <span class="p">[[</span><span class="s1">&#39;temperature&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;dissolved_oxygen&#39;</span><span class="p">]],</span>
+    <span class="s1">&#39;Labels&#39;</span><span class="p">:</span> <span class="p">[[</span><span class="s1">&#39;Temperature (°C)&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;DO (mg/L)&#39;</span><span class="p">]],</span>
+    <span class="s1">&#39;PlotType&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;combined&#39;</span><span class="p">,</span> <span class="s1">&#39;subplots&#39;</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="c1"># Save configuration</span>
+<span class="n">write_plot_control</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="s1">&#39;plot_config.yaml&#39;</span><span class="p">)</span>
+
+<span class="c1"># Generate all plots</span>
+<span class="n">plot_all_files</span><span class="p">(</span><span class="s1">&#39;plot_config.yaml&#39;</span><span class="p">,</span>
+               <span class="n">model_path</span><span class="o">=</span><span class="s1">&#39;/path/to/data&#39;</span><span class="p">,</span>
+               <span class="n">year</span><span class="o">=</span><span class="mi">2023</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="advanced-visualization">
+<h3>Advanced Visualization<a class="headerlink" href="#advanced-visualization" title="Link to this heading"></a></h3>
+<p>Customize plot appearance:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Advanced styling</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span>
+           <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+           <span class="n">style</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
+           <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+           <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+           <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+           <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Custom Styled Plot&#39;</span><span class="p">)</span>
+
+<span class="c1"># Save with high quality</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;high_quality.png&#39;</span><span class="p">,</span>
+            <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
+            <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span>
+            <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="data-analysis-and-statistics">
+<h2>Data Analysis and Statistics<a class="headerlink" href="#data-analysis-and-statistics" title="Link to this heading"></a></h2>
+<section id="descriptive-statistics">
+<h3>Descriptive Statistics<a class="headerlink" href="#descriptive-statistics" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Basic statistics</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+
+<span class="c1"># Custom statistics</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span>
+    <span class="s1">&#39;temperature&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;do&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;median&#39;</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">]</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</section>
+<section id="temporal-analysis">
+<h3>Temporal Analysis<a class="headerlink" href="#temporal-analysis" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Resample to different frequencies</span>
+<span class="n">daily_avg</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">weekly_avg</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">monthly_avg</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="c1"># Seasonal analysis</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">month</span>
+<span class="n">seasonal</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="correlation-analysis">
+<h3>Correlation Analysis<a class="headerlink" href="#correlation-analysis" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Correlation matrix</span>
+<span class="n">correlation</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+
+<span class="c1"># Visualize correlations</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">correlation</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Parameter Correlations&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="quality-control">
+<h3>Quality Control<a class="headerlink" href="#quality-control" title="Link to this heading"></a></h3>
+<p>Check data quality and identify issues:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">quality_check</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform data quality assessment&quot;&quot;&quot;</span>
+    <span class="n">issues</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Missing values</span>
+    <span class="n">missing</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">missing</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing values: </span><span class="si">{</span><span class="n">missing</span><span class="p">[</span><span class="n">missing</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Outliers (using IQR method)</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="n">Q1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+        <span class="n">Q3</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
+        <span class="n">IQR</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">-</span> <span class="n">Q1</span>
+        <span class="n">outliers</span> <span class="o">=</span> <span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">Q1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span><span class="p">))</span> <span class="o">|</span>
+                   <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">Q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span><span class="p">)))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">outliers</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">outliers</span><span class="si">}</span><span class="s2"> potential outliers&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">issues</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="report-generation">
+<h2>Report Generation<a class="headerlink" href="#report-generation" title="Link to this heading"></a></h2>
+<section id="automated-reports">
+<h3>Automated Reports<a class="headerlink" href="#automated-reports" title="Link to this heading"></a></h3>
+<p>Generate comprehensive analysis reports:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_plots_report</span>
+
+<span class="c1"># Create detailed report</span>
+<span class="n">generate_plots_report</span><span class="p">(</span>
+    <span class="n">plot_config</span><span class="p">,</span>
+    <span class="n">model_path</span><span class="o">=</span><span class="s1">&#39;/path/to/data&#39;</span><span class="p">,</span>
+    <span class="n">outfile</span><span class="o">=</span><span class="s1">&#39;comprehensive_report.md&#39;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Model Analysis Report&#39;</span><span class="p">,</span>
+    <span class="n">subtitle</span><span class="o">=</span><span class="s1">&#39;Lake Example Study&#39;</span><span class="p">,</span>
+    <span class="n">pdf_report</span><span class="o">=</span><span class="kc">True</span>  <span class="c1"># Requires pandoc</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="custom-reports">
+<h3>Custom Reports<a class="headerlink" href="#custom-reports" title="Link to this heading"></a></h3>
+<p>Create custom analysis reports:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_summary_report</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create custom summary report&quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;# Water Quality Analysis Report</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Basic info</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;## Dataset Overview</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* Records: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* Parameters: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* Date range: </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Statistics</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;## Summary Statistics</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">to_markdown</span><span class="p">())</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Correlations</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;## Parameter Correlations</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">to_markdown</span><span class="p">())</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="database-operations">
+<h2>Database Operations<a class="headerlink" href="#database-operations" title="Link to this heading"></a></h2>
+<section id="sqlite-integration">
+<h3>SQLite Integration<a class="headerlink" href="#sqlite-integration" title="Link to this heading"></a></h3>
+<p>Work with SQLite databases:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">sql_query</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.fileio</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_sqlite</span>
+
+<span class="c1"># Read entire database</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">read_sqlite</span><span class="p">(</span><span class="s1">&#39;model.db&#39;</span><span class="p">)</span>
+
+<span class="c1"># Custom queries</span>
+<span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT Date, Temperature, Dissolved_Oxygen</span>
+<span class="s2">FROM results</span>
+<span class="s2">WHERE Temperature BETWEEN 15 AND 25</span>
+<span class="s2">AND Dissolved_Oxygen &gt; 5.0</span>
+<span class="s2">ORDER BY Date</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">filtered</span> <span class="o">=</span> <span class="n">sql_query</span><span class="p">(</span><span class="s1">&#39;model.db&#39;</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="creating-databases">
+<h3>Creating Databases<a class="headerlink" href="#creating-databases" title="Link to this heading"></a></h3>
+<p>Export data to SQLite:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Create database connection</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;output.db&#39;</span><span class="p">)</span>
+
+<span class="c1"># Write DataFrame to database</span>
+<span class="n">data</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s1">&#39;water_quality&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Close connection</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="performance-optimization">
+<h2>Performance Optimization<a class="headerlink" href="#performance-optimization" title="Link to this heading"></a></h2>
+<section id="memory-management">
+<h3>Memory Management<a class="headerlink" href="#memory-management" title="Link to this heading"></a></h3>
+<p>For large datasets:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read in chunks for large files</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_large_file</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
+    <span class="n">chunks</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="n">chunksize</span><span class="p">):</span>
+        <span class="c1"># Process chunk</span>
+        <span class="n">processed_chunk</span> <span class="o">=</span> <span class="n">process_data</span><span class="p">(</span><span class="n">chunk</span><span class="p">,</span> <span class="n">year</span><span class="p">)</span>
+        <span class="n">chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">processed_chunk</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">chunks</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="parallel-processing">
+<h3>Parallel Processing<a class="headerlink" href="#parallel-processing" title="Link to this heading"></a></h3>
+<p>Process multiple files in parallel:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">concurrent.futures</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProcessPoolExecutor</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">multiprocessing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mp</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">process_file_parallel</span><span class="p">(</span><span class="n">file_args</span><span class="p">):</span>
+    <span class="n">filepath</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">file_args</span>
+    <span class="k">return</span> <span class="n">read</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="n">year</span><span class="p">,</span> <span class="n">data_columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="c1"># Prepare arguments</span>
+<span class="n">file_args</span> <span class="o">=</span> <span class="p">[(</span><span class="n">f</span><span class="p">,</span> <span class="mi">2023</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span> <span class="s1">&#39;do&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">file_list</span><span class="p">]</span>
+
+<span class="c1"># Process in parallel</span>
+<span class="k">with</span> <span class="n">ProcessPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="n">mp</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">())</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">executor</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">process_file_parallel</span><span class="p">,</span> <span class="n">file_args</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="efficient-storage">
+<h3>Efficient Storage<a class="headerlink" href="#efficient-storage" title="Link to this heading"></a></h3>
+<p>Use HDF5 for large datasets:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.fileio</span><span class="w"> </span><span class="kn">import</span> <span class="n">write_hdf</span><span class="p">,</span> <span class="n">read_hdf</span>
+
+<span class="c1"># Write compressed HDF5</span>
+<span class="n">write_hdf</span><span class="p">(</span><span class="n">large_dataset</span><span class="p">,</span>
+          <span class="n">group</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">,</span>
+          <span class="n">outfile</span><span class="o">=</span><span class="s1">&#39;large_data.h5&#39;</span><span class="p">,</span>
+          <span class="n">compression</span><span class="o">=</span><span class="s1">&#39;gzip&#39;</span><span class="p">)</span>
+
+<span class="c1"># Read specific variables only</span>
+<span class="n">subset</span> <span class="o">=</span> <span class="n">read_hdf</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">,</span>
+                  <span class="n">infile</span><span class="o">=</span><span class="s1">&#39;large_data.h5&#39;</span><span class="p">,</span>
+                  <span class="n">variables</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="integration-with-other-libraries">
+<h2>Integration with Other Libraries<a class="headerlink" href="#integration-with-other-libraries" title="Link to this heading"></a></h2>
+<section id="scientific-python-ecosystem">
+<h3>Scientific Python Ecosystem<a class="headerlink" href="#scientific-python-ecosystem" title="Link to this heading"></a></h3>
+<p>Combine with other scientific libraries:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># NumPy for numerical operations</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># SciPy for advanced analysis</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.signal</span><span class="w"> </span><span class="kn">import</span> <span class="n">savgol_filter</span>
+
+<span class="c1"># Smooth data</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;temp_smooth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">savgol_filter</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">],</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># Statistical tests</span>
+<span class="n">statistic</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">normaltest</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="machine-learning">
+<h3>Machine Learning<a class="headerlink" href="#machine-learning" title="Link to this heading"></a></h3>
+<p>Integrate with scikit-learn:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
+
+<span class="c1"># Prepare features</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="s1">&#39;temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;do&#39;</span><span class="p">,</span> <span class="s1">&#39;ph&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="c1"># Standardize</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">features_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+
+<span class="c1"># Principal Component Analysis</span>
+<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">pca_result</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">features_scaled</span><span class="p">)</span>
+
+<span class="c1"># Clustering</span>
+<span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">clusters</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">features_scaled</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="gis-integration">
+<h3>GIS Integration<a class="headerlink" href="#gis-integration" title="Link to this heading"></a></h3>
+<p>Work with spatial data:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># With GeoPandas for spatial analysis</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+
+<span class="c1"># Add spatial information</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;latitude&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">45.0</span>  <span class="c1"># Example coordinates</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;longitude&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">120.0</span>
+
+<span class="c1"># Create GeoDataFrame</span>
+<span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">,</span>
+    <span class="n">geometry</span><span class="o">=</span><span class="n">gpd</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">longitude</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">latitude</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading"></a></h2>
+<section id="code-organization">
+<h3>Code Organization<a class="headerlink" href="#code-organization" title="Link to this heading"></a></h3>
+<p>Structure your analysis code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># config.py</span>
+<span class="n">YEAR</span> <span class="o">=</span> <span class="mi">2023</span>
+<span class="n">DATA_PATH</span> <span class="o">=</span> <span class="s1">&#39;/path/to/data&#39;</span>
+<span class="n">OUTPUT_PATH</span> <span class="o">=</span> <span class="s1">&#39;/path/to/output&#39;</span>
+<span class="n">COLUMNS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;dissolved_oxygen&#39;</span><span class="p">,</span> <span class="s1">&#39;ph&#39;</span><span class="p">]</span>
+
+<span class="c1"># analysis.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">config</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.fileio</span><span class="w"> </span><span class="kn">import</span> <span class="n">read</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">load_data</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">read</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">DATA_PATH</span><span class="si">}</span><span class="s1">/output.csv&#39;</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="n">YEAR</span><span class="p">,</span> <span class="n">data_columns</span><span class="o">=</span><span class="n">COLUMNS</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_plots</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Water Quality&#39;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">OUTPUT_PATH</span><span class="si">}</span><span class="s1">/water_quality.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="error-handling">
+<h3>Error Handling<a class="headerlink" href="#error-handling" title="Link to this heading"></a></h3>
+<p>Implement robust error handling:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">safe_read_file</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">columns</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Safely read file with error handling&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="n">year</span><span class="p">,</span> <span class="n">data_columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: File not found: </span><span class="si">{</span><span class="n">filepath</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error reading </span><span class="si">{</span><span class="n">filepath</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</section>
+<section id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Link to this heading"></a></h3>
+<p>Document your analysis:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">analyze_water_quality</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Perform comprehensive water quality analysis.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    -----------</span>
+<span class="sd">    data : pd.DataFrame</span>
+<span class="sd">        Water quality data with datetime index</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    --------</span>
+<span class="sd">    dict : Analysis results including statistics and plots</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Calculate statistics</span>
+    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;stats&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+
+    <span class="c1"># Generate plots</span>
+    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;figure&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">results</span>
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h3>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h3>
+<p>Write tests for your functions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">day_of_year_to_date</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_date_conversion</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test date conversion functionality&quot;&quot;&quot;</span>
+    <span class="n">dates</span> <span class="o">=</span> <span class="n">day_of_year_to_date</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">365.0</span><span class="p">])</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">dates</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+    <span class="k">assert</span> <span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="mi">2023</span>
+    <span class="k">assert</span> <span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">month</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="k">assert</span> <span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">day</span> <span class="o">==</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<section id="common-issues">
+<h3>Common Issues<a class="headerlink" href="#common-issues" title="Link to this heading"></a></h3>
+<p><strong>Memory Errors with Large Files</strong></p>
+<ul class="simple">
+<li><p>Use chunked reading for very large files</p></li>
+<li><p>Process data in smaller segments</p></li>
+<li><p>Use HDF5 format for better performance</p></li>
+</ul>
+<p><strong>Date Conversion Problems</strong></p>
+<ul class="simple">
+<li><p>Ensure day-of-year values are in correct range (1.0-365.0/366.0)</p></li>
+<li><p>Check for leap years when using day 366</p></li>
+<li><p>Verify time zone assumptions</p></li>
+</ul>
+<p><strong>Plot Display Issues</strong></p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">fig.show()</span></code> for interactive environments</p></li>
+<li><p>Set appropriate figure size with <code class="docutils literal notranslate"><span class="pre">figsize</span></code> parameter</p></li>
+<li><p>Check matplotlib backend configuration</p></li>
+</ul>
+<p><strong>Import Errors</strong></p>
+<ul class="simple">
+<li><p>Verify all dependencies are installed</p></li>
+<li><p>Check virtual environment activation</p></li>
+<li><p>Update package versions if necessary</p></li>
+</ul>
+</section>
+</section>
+<section id="getting-help">
+<h2>Getting Help<a class="headerlink" href="#getting-help" title="Link to this heading"></a></h2>
+<p>When you encounter issues:</p>
+<ol class="arabic simple">
+<li><p><strong>Check the examples</strong> in this documentation</p></li>
+<li><p><strong>Read the API reference</strong> for detailed function descriptions</p></li>
+<li><p><strong>Search GitHub issues</strong> for similar problems</p></li>
+<li><p><strong>Create a new issue</strong> with minimal reproducible example</p></li>
+<li><p><strong>Include your environment details</strong> (Python version, OS, package versions)</p></li>
+</ol>
+</section>
+<section id="contributing">
+<h2>Contributing<a class="headerlink" href="#contributing" title="Link to this heading"></a></h2>
+<p>To contribute to the library:</p>
+<ol class="arabic simple">
+<li><p><strong>Fork the repository</strong> on GitHub</p></li>
+<li><p><strong>Create a feature branch</strong> for your changes</p></li>
+<li><p><strong>Add tests</strong> for new functionality</p></li>
+<li><p><strong>Update documentation</strong> as needed</p></li>
+<li><p><strong>Submit a pull request</strong> with clear description</p></li>
+</ol>
+<p>See the <a class="reference internal" href="contributing.html"><span class="doc">Contributing</span></a> guide for detailed instructions.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="quickstart.html" class="btn btn-neutral float-left" title="Quick Start Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Todd E. Steissberg, PhD, PE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

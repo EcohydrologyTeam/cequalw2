@@ -1,0 +1,280 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CE-QUAL-W2 Python Library Documentation &mdash; CE-QUAL-W2 Python Library v1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            CE-QUAL-W2 Python Library
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">CE-QUAL-W2 Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">CE-QUAL-W2 Python Library Documentation</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/ecohydrology/cequalw2-Claude/blob/main/docs_sphinx/index.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ce-qual-w2-python-library-documentation">
+<h1>CE-QUAL-W2 Python Library Documentation<a class="headerlink" href="#ce-qual-w2-python-library-documentation" title="Link to this heading"></a></h1>
+<p>Welcome to the CE-QUAL-W2 Python Library documentation!</p>
+<p>This library provides tools for reading, writing, and visualizing CE-QUAL-W2 model data. CE-QUAL-W2 is a two-dimensional, vertically-averaged, hydrodynamic and water quality model used for simulating water movement, temperature, and concentrations of various chemical constituents in lakes, reservoirs, estuaries, and rivers.</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation-methods">Installation Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#virtual-environment-setup">Virtual Environment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#verification">Verification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation-troubleshooting">Installation Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#platform-specific-notes">Platform-Specific Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#development-installation">Development Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#docker-installation">Docker Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#updating">Updating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#getting-help">Getting Help</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#basic-usage">Basic Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#common-file-formats">Common File Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#visualization-examples">Visualization Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#data-analysis">Data Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#data-export">Data Export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#working-with-multiple-files">Working with Multiple Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#report-generation">Report Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#advanced-features">Advanced Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#next-steps">Next Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#getting-help">Getting Help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#common-pitfalls">Common Pitfalls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#tips-for-success">Tips for Success</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user_guide.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide.html#core-concepts">Core Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide.html#file-i-o-operations">File I/O Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide.html#date-and-time-operations">Date and Time Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide.html#data-visualization">Data Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide.html#data-analysis-and-statistics">Data Analysis and Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide.html#report-generation">Report Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide.html#database-operations">Database Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide.html#performance-optimization">Performance Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide.html#integration-with-other-libraries">Integration with Other Libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide.html#best-practices">Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide.html#getting-help">Getting Help</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide.html#contributing">Contributing</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-cequalw2">Main Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#file-i-o-module-cequalw2-fileio">File I/O Module (cequalw2.fileio)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#utilities-module-cequalw2-utils">Utilities Module (cequalw2.utils)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#visualization-module-cequalw2-visualization">Visualization Module (cequalw2.visualization)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#analysis-module-cequalw2-analysis">Analysis Module (cequalw2.analysis)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#function-details">Function Details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#data-types-and-constants">Data Types and Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#error-handling">Error Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#usage-patterns">Usage Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#performance-considerations">Performance Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#version-compatibility">Version Compatibility</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#quick-start-examples">Quick Start Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#file-format-examples">File Format Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#visualization-examples">Visualization Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#analysis-examples">Analysis Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#batch-processing-examples">Batch Processing Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#integration-examples">Integration Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#performance-examples">Performance Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#complete-workflow-example">Complete Workflow Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#test-structure">Test Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#running-tests">Running Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#test-categories">Test Categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#fixture-examples">Fixture Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#error-handling-tests">Error Handling Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#performance-tests">Performance Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#mock-and-patch-tests">Mock and Patch Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#test-configuration">Test Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#continuous-integration">Continuous Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#best-practices">Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#running-tests-in-development">Running Tests in Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#contributing-tests">Contributing Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#quick-start-for-contributors">Quick Start for Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#types-of-contributions">Types of Contributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#development-workflow">Development Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#coding-standards">Coding Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#testing-guidelines">Testing Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#documentation-standards">Documentation Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#pull-request-process">Pull Request Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#issue-guidelines">Issue Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#community-guidelines">Community Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#recognition">Recognition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#release-process">Release Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#development-setup-details">Development Setup Details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#advanced-contributing">Advanced Contributing</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>File I/O</strong>: Read various CE-QUAL-W2 file formats (CSV, fixed-width, SQLite, HDF5, Excel)</p></li>
+<li><p><strong>Date/Time Utilities</strong>: Convert CE-QUAL-W2 day-of-year format to Python datetime objects</p></li>
+<li><p><strong>Visualization</strong>: Create plots and visualizations using matplotlib, seaborn, and holoviews</p></li>
+<li><p><strong>Analysis</strong>: Statistical analysis and report generation tools</p></li>
+<li><p><strong>Flexible</strong>: Automatic file type detection and multiple output format support</p></li>
+</ul>
+</section>
+<section id="quick-start">
+<h2>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.fileio</span><span class="w"> </span><span class="kn">import</span> <span class="n">read</span><span class="p">,</span> <span class="n">FileType</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">day_of_year_to_date</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.visualization</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot</span>
+
+<span class="c1"># Read CE-QUAL-W2 output file</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="s1">&#39;output.csv&#39;</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2023</span><span class="p">,</span> <span class="n">data_columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span> <span class="s1">&#39;do&#39;</span><span class="p">])</span>
+
+<span class="c1"># Convert day-of-year to datetime</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="n">day_of_year_to_date</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">32.5</span><span class="p">,</span> <span class="mf">91.0</span><span class="p">])</span>
+
+<span class="c1"># Create visualization</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Temperature (°C)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
+<p>From source (development mode):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ecohydrology/cequalw2-Claude.git
+<span class="nb">cd</span><span class="w"> </span>cequalw2-Claude
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+<p>Dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Todd E. Steissberg, PhD, PE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

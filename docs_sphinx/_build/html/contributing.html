@@ -1,0 +1,722 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contributing &mdash; CE-QUAL-W2 Python Library v1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Testing Guide" href="testing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            CE-QUAL-W2 Python Library
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">User Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#quick-start-for-contributors">Quick Start for Contributors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#getting-started">Getting Started</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#types-of-contributions">Types of Contributions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bug-reports">Bug Reports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#feature-requests">Feature Requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#code-contributions">Code Contributions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#documentation-improvements">Documentation Improvements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#development-workflow">Development Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#creating-a-feature-branch">Creating a Feature Branch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#making-changes">Making Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#coding-standards">Coding Standards</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#python-style-guide">Python Style Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#code-formatting-tools">Code Formatting Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-code-style">Example Code Style</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-guidelines">Testing Guidelines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#writing-tests">Writing Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-tests">Running Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#documentation-standards">Documentation Standards</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#docstring-format">Docstring Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#documentation-updates">Documentation Updates</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pull-request-process">Pull Request Process</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#before-submitting">Before Submitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-pull-request">Creating Pull Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pull-request-template">Pull Request Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#review-process">Review Process</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#issue-guidelines">Issue Guidelines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Bug Reports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Feature Requests</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#community-guidelines">Community Guidelines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#code-of-conduct">Code of Conduct</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-help">Getting Help</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#recognition">Recognition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#release-process">Release Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#development-setup-details">Development Setup Details</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#development-dependencies">Development Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pre-commit-hooks">Pre-commit Hooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ide-configuration">IDE Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#advanced-contributing">Advanced Contributing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#performance-improvements">Performance Improvements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#api-changes">API Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#large-features">Large Features</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CE-QUAL-W2 Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Contributing</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/ecohydrology/cequalw2-Claude/blob/main/docs_sphinx/contributing.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="contributing">
+<h1>Contributing<a class="headerlink" href="#contributing" title="Link to this heading"></a></h1>
+<p>Thank you for your interest in contributing to the CE-QUAL-W2 Python Library!</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For detailed contribution guidelines, see the
+<a class="reference external" href="https://github.com/ecohydrology/cequalw2-Claude/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>
+file in the repository root.</p>
+</div>
+<section id="quick-start-for-contributors">
+<h2>Quick Start for Contributors<a class="headerlink" href="#quick-start-for-contributors" title="Link to this heading"></a></h2>
+<section id="getting-started">
+<h3>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p><strong>Fork and Clone</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fork on GitHub, then clone your fork</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/YOUR_USERNAME/cequalw2-Claude.git
+<span class="nb">cd</span><span class="w"> </span>cequalw2-Claude
+</pre></div>
+</div>
+</li>
+<li><p><strong>Set Up Development Environment</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create virtual environment</span>
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+<span class="nb">source</span><span class="w"> </span>venv/bin/activate<span class="w">  </span><span class="c1"># On Windows: venv\Scripts\activate</span>
+
+<span class="c1"># Install in development mode</span>
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements-dev.txt
+</pre></div>
+</div>
+</li>
+<li><p><strong>Run Tests</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verify everything works</span>
+pytest<span class="w"> </span>tests/
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+<section id="types-of-contributions">
+<h2>Types of Contributions<a class="headerlink" href="#types-of-contributions" title="Link to this heading"></a></h2>
+<p>We welcome various types of contributions:</p>
+<section id="bug-reports">
+<h3>Bug Reports<a class="headerlink" href="#bug-reports" title="Link to this heading"></a></h3>
+<p>Help us improve by reporting issues:</p>
+<ul class="simple">
+<li><p>Use the GitHub issue template</p></li>
+<li><p>Include Python version and OS details</p></li>
+<li><p>Provide minimal reproducible example</p></li>
+<li><p>Include complete error messages</p></li>
+</ul>
+</section>
+<section id="feature-requests">
+<h3>Feature Requests<a class="headerlink" href="#feature-requests" title="Link to this heading"></a></h3>
+<p>Suggest new functionality:</p>
+<ul class="simple">
+<li><p>Describe the use case clearly</p></li>
+<li><p>Explain the proposed interface</p></li>
+<li><p>Consider implementation complexity</p></li>
+<li><p>Discuss with maintainers first for major changes</p></li>
+</ul>
+</section>
+<section id="code-contributions">
+<h3>Code Contributions<a class="headerlink" href="#code-contributions" title="Link to this heading"></a></h3>
+<p>Implement bug fixes or new features:</p>
+<ul class="simple">
+<li><p>Follow coding standards</p></li>
+<li><p>Add comprehensive tests</p></li>
+<li><p>Update documentation</p></li>
+<li><p>Keep changes focused and atomic</p></li>
+</ul>
+</section>
+<section id="documentation-improvements">
+<h3>Documentation Improvements<a class="headerlink" href="#documentation-improvements" title="Link to this heading"></a></h3>
+<p>Enhance or clarify documentation:</p>
+<ul class="simple">
+<li><p>Fix typos and improve clarity</p></li>
+<li><p>Add examples for complex features</p></li>
+<li><p>Update API documentation</p></li>
+<li><p>Improve user guides</p></li>
+</ul>
+</section>
+</section>
+<section id="development-workflow">
+<h2>Development Workflow<a class="headerlink" href="#development-workflow" title="Link to this heading"></a></h2>
+<section id="creating-a-feature-branch">
+<h3>Creating a Feature Branch<a class="headerlink" href="#creating-a-feature-branch" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ensure you&#39;re on main and up to date</span>
+git<span class="w"> </span>checkout<span class="w"> </span>main
+git<span class="w"> </span>pull<span class="w"> </span>upstream<span class="w"> </span>main
+
+<span class="c1"># Create feature branch</span>
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>feature/descriptive-name
+</pre></div>
+</div>
+</section>
+<section id="making-changes">
+<h3>Making Changes<a class="headerlink" href="#making-changes" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>Code Changes</strong>: Follow the style guide and add tests</p></li>
+<li><p><strong>Documentation</strong>: Update relevant documentation</p></li>
+<li><p><strong>Tests</strong>: Ensure all tests pass and add new ones</p></li>
+<li><p><strong>Commit</strong>: Use clear, descriptive commit messages</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Good commit messages</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Add support for reading NPT files with custom headers&quot;</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Fix date conversion bug for leap years&quot;</span>
+
+<span class="c1"># Avoid vague messages</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Fix bug&quot;</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Update code&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="coding-standards">
+<h2>Coding Standards<a class="headerlink" href="#coding-standards" title="Link to this heading"></a></h2>
+<section id="python-style-guide">
+<h3>Python Style Guide<a class="headerlink" href="#python-style-guide" title="Link to this heading"></a></h3>
+<p>We follow PEP 8 with some modifications:</p>
+<ul class="simple">
+<li><p><strong>Line length</strong>: 88 characters (Black formatter default)</p></li>
+<li><p><strong>Import order</strong>: Use isort for import organization</p></li>
+<li><p><strong>Docstrings</strong>: Google-style docstrings for all public functions</p></li>
+</ul>
+</section>
+<section id="code-formatting-tools">
+<h3>Code Formatting Tools<a class="headerlink" href="#code-formatting-tools" title="Link to this heading"></a></h3>
+<p>Use these tools to maintain consistent style:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Format code with Black</span>
+black<span class="w"> </span>cequalw2/
+
+<span class="c1"># Sort imports with isort</span>
+isort<span class="w"> </span>cequalw2/
+
+<span class="c1"># Check style with flake8</span>
+flake8<span class="w"> </span>cequalw2/
+</pre></div>
+</div>
+</section>
+<section id="example-code-style">
+<h3>Example Code Style<a class="headerlink" href="#example-code-style" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Module docstring describing the module&#39;s purpose.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">day_of_year_to_date</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">read_data_file</span><span class="p">(</span>
+    <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">year</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">skiprows</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read CE-QUAL-W2 data file and return processed DataFrame.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filepath: Path to the input file</span>
+<span class="sd">        year: Start year for date conversion</span>
+<span class="sd">        columns: List of column names</span>
+<span class="sd">        skiprows: Number of header rows to skip</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        DataFrame with datetime index and specified columns</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        FileNotFoundError: If the input file doesn&#39;t exist</span>
+<span class="sd">        ValueError: If columns are not found in the file</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; df = read_data_file(&#39;output.csv&#39;, 2023, [&#39;temp&#39;, &#39;do&#39;])</span>
+<span class="sd">        &gt;&gt;&gt; print(df.shape)</span>
+<span class="sd">        (365, 2)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File not found: </span><span class="si">{</span><span class="n">filepath</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Implementation here</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="testing-guidelines">
+<h2>Testing Guidelines<a class="headerlink" href="#testing-guidelines" title="Link to this heading"></a></h2>
+<section id="writing-tests">
+<h3>Writing Tests<a class="headerlink" href="#writing-tests" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Write tests for all new functionality</p></li>
+<li><p>Use descriptive test names</p></li>
+<li><p>Follow Arrange-Act-Assert pattern</p></li>
+<li><p>Test both normal and edge cases</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cequalw2.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">day_of_year_to_date</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestDateConversion</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test date conversion utilities.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_single_day_conversion_normal_case</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test conversion of single day-of-year value.&quot;&quot;&quot;</span>
+        <span class="c1"># Arrange</span>
+        <span class="n">year</span> <span class="o">=</span> <span class="mi">2023</span>
+        <span class="n">day_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>
+
+        <span class="c1"># Act</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">day_of_year_to_date</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">day_values</span><span class="p">)</span>
+
+        <span class="c1"># Assert</span>
+        <span class="k">assert</span> <span class="n">result</span> <span class="o">==</span> <span class="n">expected</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_empty_list_edge_case</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test conversion with empty input list.&quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">day_of_year_to_date</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="k">assert</span> <span class="n">result</span> <span class="o">==</span> <span class="p">[]</span>
+</pre></div>
+</div>
+</section>
+<section id="running-tests">
+<h3>Running Tests<a class="headerlink" href="#running-tests" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run all tests</span>
+pytest
+
+<span class="c1"># Run with coverage</span>
+pytest<span class="w"> </span>--cov<span class="o">=</span>cequalw2
+
+<span class="c1"># Run specific test file</span>
+pytest<span class="w"> </span>tests/test_datetime.py
+</pre></div>
+</div>
+</section>
+</section>
+<section id="documentation-standards">
+<h2>Documentation Standards<a class="headerlink" href="#documentation-standards" title="Link to this heading"></a></h2>
+<section id="docstring-format">
+<h3>Docstring Format<a class="headerlink" href="#docstring-format" title="Link to this heading"></a></h3>
+<p>Use Google-style docstrings for all public functions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">complex_function</span><span class="p">(</span>
+    <span class="n">param1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">param2</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">param3</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    One-line summary of what the function does.</span>
+
+<span class="sd">    Longer description if needed, explaining the purpose,</span>
+<span class="sd">    algorithm, or important implementation details.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        param1: Description of parameter 1</span>
+<span class="sd">        param2: Description of parameter 2</span>
+<span class="sd">        param3: Optional parameter description</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Description of return value and its structure</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: When parameter validation fails</span>
+<span class="sd">        FileNotFoundError: When input file is missing</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        Basic usage example:</span>
+
+<span class="sd">        &gt;&gt;&gt; result = complex_function(&quot;input&quot;, 42)</span>
+<span class="sd">        &gt;&gt;&gt; print(result[&#39;status&#39;])</span>
+<span class="sd">        &#39;success&#39;</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        Any important notes about usage, performance,</span>
+<span class="sd">        or limitations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="documentation-updates">
+<h3>Documentation Updates<a class="headerlink" href="#documentation-updates" title="Link to this heading"></a></h3>
+<p>When making changes:</p>
+<ul class="simple">
+<li><p>Update README.md for new features</p></li>
+<li><p>Add examples to docs/EXAMPLES.md</p></li>
+<li><p>Update API documentation</p></li>
+<li><p>Ensure all examples work correctly</p></li>
+</ul>
+</section>
+</section>
+<section id="pull-request-process">
+<h2>Pull Request Process<a class="headerlink" href="#pull-request-process" title="Link to this heading"></a></h2>
+<section id="before-submitting">
+<h3>Before Submitting<a class="headerlink" href="#before-submitting" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p><strong>Run Quality Checks</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Format and check code</span>
+black<span class="w"> </span>cequalw2/
+isort<span class="w"> </span>cequalw2/
+flake8<span class="w"> </span>cequalw2/
+
+<span class="c1"># Run tests</span>
+pytest<span class="w"> </span>tests/
+</pre></div>
+</div>
+</li>
+<li><p><strong>Update Documentation</strong></p>
+<ul class="simple">
+<li><p>Add docstrings to new functions</p></li>
+<li><p>Update relevant documentation files</p></li>
+<li><p>Add examples if appropriate</p></li>
+</ul>
+</li>
+<li><p><strong>Write Clear Commit Messages</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use descriptive commit messages</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Add support for reading NPT files with custom headers&quot;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="creating-pull-request">
+<h3>Creating Pull Request<a class="headerlink" href="#creating-pull-request" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p><strong>Push to Your Fork</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>feature/your-feature-name
+</pre></div>
+</div>
+</li>
+<li><p><strong>Create Pull Request on GitHub</strong></p>
+<ul class="simple">
+<li><p>Use the pull request template</p></li>
+<li><p>Provide clear description of changes</p></li>
+<li><p>Reference any related issues</p></li>
+<li><p>Include screenshots for UI changes</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="pull-request-template">
+<h3>Pull Request Template<a class="headerlink" href="#pull-request-template" title="Link to this heading"></a></h3>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gu">## Description</span>
+Brief description of changes made.
+
+<span class="gu">## Type of Change</span>
+<span class="k">- [ ]</span> Bug fix (non-breaking change fixing an issue)
+<span class="k">- [ ]</span> New feature (non-breaking change adding functionality)
+<span class="k">- [ ]</span> Breaking change (fix or feature causing existing functionality to change)
+<span class="k">- [ ]</span> Documentation update
+
+<span class="gu">## Testing</span>
+<span class="k">- [ ]</span> All existing tests pass
+<span class="k">- [ ]</span> New tests added for new functionality
+<span class="k">- [ ]</span> Manual testing completed
+
+<span class="gu">## Checklist</span>
+<span class="k">- [ ]</span> Code follows project style guidelines
+<span class="k">- [ ]</span> Self-review completed
+<span class="k">- [ ]</span> Documentation updated
+<span class="k">- [ ]</span> No breaking changes (or breaking changes documented)
+
+<span class="gu">## Related Issues</span>
+Fixes #(issue number)
+</pre></div>
+</div>
+</section>
+<section id="review-process">
+<h3>Review Process<a class="headerlink" href="#review-process" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>Automated Checks</strong>: All CI checks must pass</p></li>
+<li><p><strong>Code Review</strong>: At least one maintainer review required</p></li>
+<li><p><strong>Testing</strong>: Verify tests pass and coverage is maintained</p></li>
+<li><p><strong>Documentation</strong>: Ensure documentation is updated</p></li>
+</ol>
+</section>
+</section>
+<section id="issue-guidelines">
+<h2>Issue Guidelines<a class="headerlink" href="#issue-guidelines" title="Link to this heading"></a></h2>
+<section id="id1">
+<h3>Bug Reports<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<p>Include the following information:</p>
+<ul class="simple">
+<li><p><strong>Environment</strong>: Python version, OS, package versions</p></li>
+<li><p><strong>Description</strong>: Clear description of the bug</p></li>
+<li><p><strong>Reproduction</strong>: Minimal code to reproduce the issue</p></li>
+<li><p><strong>Expected vs Actual</strong>: What you expected vs what happened</p></li>
+<li><p><strong>Error Messages</strong>: Complete error messages and stack traces</p></li>
+</ul>
+</section>
+<section id="id2">
+<h3>Feature Requests<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<p>Provide these details:</p>
+<ul class="simple">
+<li><p><strong>Use Case</strong>: Describe the problem you’re trying to solve</p></li>
+<li><p><strong>Proposed Solution</strong>: Your ideas for implementation</p></li>
+<li><p><strong>Alternatives</strong>: Other approaches you’ve considered</p></li>
+<li><p><strong>Additional Context</strong>: Any other relevant information</p></li>
+</ul>
+</section>
+</section>
+<section id="community-guidelines">
+<h2>Community Guidelines<a class="headerlink" href="#community-guidelines" title="Link to this heading"></a></h2>
+<section id="code-of-conduct">
+<h3>Code of Conduct<a class="headerlink" href="#code-of-conduct" title="Link to this heading"></a></h3>
+<p>We expect all contributors to:</p>
+<ul class="simple">
+<li><p>Use welcoming and inclusive language</p></li>
+<li><p>Be respectful of differing viewpoints</p></li>
+<li><p>Accept constructive criticism gracefully</p></li>
+<li><p>Focus on what’s best for the community</p></li>
+<li><p>Show empathy towards other community members</p></li>
+</ul>
+</section>
+<section id="getting-help">
+<h3>Getting Help<a class="headerlink" href="#getting-help" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Documentation</strong>: Check existing documentation first</p></li>
+<li><p><strong>GitHub Issues</strong>: Search existing issues</p></li>
+<li><p><strong>Discussions</strong>: Use GitHub discussions for questions</p></li>
+<li><p><strong>Email</strong>: Contact maintainers for sensitive issues</p></li>
+</ul>
+</section>
+</section>
+<section id="recognition">
+<h2>Recognition<a class="headerlink" href="#recognition" title="Link to this heading"></a></h2>
+<p>Contributors are recognized in:</p>
+<ul class="simple">
+<li><p><strong>CONTRIBUTORS.md</strong>: All contributors listed</p></li>
+<li><p><strong>Release Notes</strong>: Significant contributions highlighted</p></li>
+<li><p><strong>Documentation</strong>: Author attribution where appropriate</p></li>
+<li><p><strong>GitHub</strong>: Contributor statistics and graphs</p></li>
+</ul>
+</section>
+<section id="release-process">
+<h2>Release Process<a class="headerlink" href="#release-process" title="Link to this heading"></a></h2>
+<p>For maintainers, the release process involves:</p>
+<ol class="arabic simple">
+<li><p><strong>Version Update</strong>: Update version in setup.py and __init__.py</p></li>
+<li><p><strong>Changelog</strong>: Update CHANGELOG.md with new features and fixes</p></li>
+<li><p><strong>Documentation</strong>: Ensure documentation is current</p></li>
+<li><p><strong>Testing</strong>: Run full test suite</p></li>
+<li><p><strong>Tagging</strong>: Create release tag</p></li>
+<li><p><strong>Distribution</strong>: Upload to PyPI</p></li>
+<li><p><strong>Announcement</strong>: Announce release</p></li>
+</ol>
+</section>
+<section id="development-setup-details">
+<h2>Development Setup Details<a class="headerlink" href="#development-setup-details" title="Link to this heading"></a></h2>
+<section id="development-dependencies">
+<h3>Development Dependencies<a class="headerlink" href="#development-dependencies" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install development dependencies</span>
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements-dev.txt
+
+<span class="c1"># Contents of requirements-dev.txt:</span>
+pytest&gt;<span class="o">=</span><span class="m">6</span>.0
+pytest-cov&gt;<span class="o">=</span><span class="m">2</span>.10
+black&gt;<span class="o">=</span><span class="m">21</span>.0
+isort&gt;<span class="o">=</span><span class="m">5</span>.0
+flake8&gt;<span class="o">=</span><span class="m">3</span>.8
+mypy&gt;<span class="o">=</span><span class="m">0</span>.812
+sphinx&gt;<span class="o">=</span><span class="m">4</span>.0
+sphinx-rtd-theme&gt;<span class="o">=</span><span class="m">0</span>.5
+</pre></div>
+</div>
+</section>
+<section id="pre-commit-hooks">
+<h3>Pre-commit Hooks<a class="headerlink" href="#pre-commit-hooks" title="Link to this heading"></a></h3>
+<p>Set up pre-commit hooks to ensure code quality:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install pre-commit</span>
+pip<span class="w"> </span>install<span class="w"> </span>pre-commit
+
+<span class="c1"># Install hooks</span>
+pre-commit<span class="w"> </span>install
+
+<span class="c1"># Run hooks manually</span>
+pre-commit<span class="w"> </span>run<span class="w"> </span>--all-files
+</pre></div>
+</div>
+</section>
+<section id="ide-configuration">
+<h3>IDE Configuration<a class="headerlink" href="#ide-configuration" title="Link to this heading"></a></h3>
+<p><strong>VS Code Settings</strong> (<cite>.vscode/settings.json</cite>):</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;python.formatting.provider&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;python.linting.enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;python.linting.flake8Enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;python.testing.pytestEnabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;python.testing.unittestEnabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>PyCharm Configuration</strong>:</p>
+<ul class="simple">
+<li><p>Set code style to Black</p></li>
+<li><p>Enable pytest as test runner</p></li>
+<li><p>Configure flake8 as external tool</p></li>
+</ul>
+</section>
+</section>
+<section id="advanced-contributing">
+<h2>Advanced Contributing<a class="headerlink" href="#advanced-contributing" title="Link to this heading"></a></h2>
+<section id="performance-improvements">
+<h3>Performance Improvements<a class="headerlink" href="#performance-improvements" title="Link to this heading"></a></h3>
+<p>When contributing performance improvements:</p>
+<ul class="simple">
+<li><p>Include benchmarks showing improvement</p></li>
+<li><p>Test with realistic data sizes</p></li>
+<li><p>Consider memory usage implications</p></li>
+<li><p>Document any trade-offs</p></li>
+</ul>
+</section>
+<section id="api-changes">
+<h3>API Changes<a class="headerlink" href="#api-changes" title="Link to this heading"></a></h3>
+<p>For changes to public APIs:</p>
+<ul class="simple">
+<li><p>Discuss with maintainers first</p></li>
+<li><p>Maintain backward compatibility when possible</p></li>
+<li><p>Document breaking changes clearly</p></li>
+<li><p>Provide migration guide for users</p></li>
+</ul>
+</section>
+<section id="large-features">
+<h3>Large Features<a class="headerlink" href="#large-features" title="Link to this heading"></a></h3>
+<p>For substantial new features:</p>
+<ol class="arabic simple">
+<li><p><strong>Design Document</strong>: Create detailed design proposal</p></li>
+<li><p><strong>Discussion</strong>: Get community feedback</p></li>
+<li><p><strong>Prototype</strong>: Implement minimal working version</p></li>
+<li><p><strong>Incremental</strong>: Break into smaller pull requests</p></li>
+<li><p><strong>Documentation</strong>: Comprehensive documentation and examples</p></li>
+</ol>
+<p>Thank you for contributing to the CE-QUAL-W2 Python Library! Your contributions help make water quality modeling more accessible and efficient for researchers and engineers worldwide.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="testing.html" class="btn btn-neutral float-left" title="Testing Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Todd E. Steissberg, PhD, PE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

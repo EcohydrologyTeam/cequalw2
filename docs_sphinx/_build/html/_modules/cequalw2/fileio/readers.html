@@ -1,0 +1,664 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cequalw2.fileio.readers &mdash; CE-QUAL-W2 Python Library v1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            CE-QUAL-W2 Python Library
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_guide.html">User Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing.html">Testing Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">CE-QUAL-W2 Python Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">cequalw2.fileio.readers</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for cequalw2.fileio.readers</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">h5py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span> <span class="k">as</span> <span class="n">w2_datetime</span>
+
+
+<div class="viewcode-block" id="FileType">
+<a class="viewcode-back" href="../../../api.html#cequalw2.fileio.FileType">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FileType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    File type enumeration</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        Enum (int): Enumeration</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">UNKNOWN</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">FIXED_WIDTH</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">CSV</span> <span class="o">=</span> <span class="mi">2</span></div>
+
+
+
+<div class="viewcode-block" id="get_header_row_number">
+<a class="viewcode-back" href="../../../api.html#cequalw2.fileio.get_header_row_number">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_header_row_number</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the row number of the header in a file.</span>
+
+<span class="sd">    This function determines the row number of the header in a file based on the file name.</span>
+<span class="sd">    If the file name starts with &#39;tsr&#39; (case insensitive), the header row number is 0.</span>
+<span class="sd">    Otherwise, the header row number is 2.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        file_path (str): The path of the file.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: The row number of the header in the file.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;tsr&#39;</span><span class="p">):</span>
+        <span class="n">header_row_number</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">header_row_number</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">header_row_number</span></div>
+
+
+
+<div class="viewcode-block" id="get_data_columns_csv">
+<a class="viewcode-back" href="../../../api.html#cequalw2.fileio.get_data_columns_csv">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_data_columns_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extracts data columns from a file.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        file_path (str): The path to the file.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: A list of data columns extracted from the file.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        FileNotFoundError: If the specified file does not exist.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="c1"># Get the header line</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+        <span class="n">header_row_number</span> <span class="o">=</span> <span class="n">get_header_row_number</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+        <span class="n">header_vals</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="n">header_row_number</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+        <span class="c1"># Get the data columns</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">header_vals</span><span class="p">):</span>
+            <span class="n">header_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">data_columns</span> <span class="o">=</span> <span class="n">header_vals</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">return</span> <span class="n">data_columns</span></div>
+
+
+
+<div class="viewcode-block" id="get_data_columns_fixed_width">
+<a class="viewcode-back" href="../../../api.html#cequalw2.fileio.get_data_columns_fixed_width">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_data_columns_fixed_width</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves the data columns from a fixed-width file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        file_path (str): The path to the fixed-width file.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: A list containing the data columns extracted from the file.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; file_path = &#39;data.txt&#39;</span>
+<span class="sd">        &gt;&gt;&gt; data_columns = get_data_columns_fixed_width(file_path)</span>
+<span class="sd">        &gt;&gt;&gt; print(data_columns)</span>
+<span class="sd">        [&#39;Column1&#39;, &#39;Column2&#39;, &#39;Column3&#39;, &#39;Column4&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="c1"># Get the header line</span>
+        <span class="n">header_row_number</span> <span class="o">=</span> <span class="n">get_header_row_number</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()[</span><span class="n">header_row_number</span><span class="p">]</span>
+        <span class="n">header_vals</span> <span class="o">=</span> <span class="n">split_fixed_width_line</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">header_vals</span><span class="p">):</span>
+            <span class="n">header_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">data_columns</span> <span class="o">=</span> <span class="n">header_vals</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">if</span> <span class="n">data_columns</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">data_columns</span> <span class="o">=</span> <span class="n">data_columns</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">data_columns</span></div>
+
+
+
+<div class="viewcode-block" id="split_fixed_width_line">
+<a class="viewcode-back" href="../../../api.html#cequalw2.fileio.split_fixed_width_line">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">split_fixed_width_line</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">field_width</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Split a line into segments of fixed width.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        line (str): The line to be split.</span>
+<span class="sd">        field_width (int): The width of each segment.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: A list of segments of fixed width.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; line = &quot;This is a sample line that we want to split.&quot;</span>
+<span class="sd">        &gt;&gt;&gt; segments = split_fixed_width_line(line, 8)</span>
+<span class="sd">        &gt;&gt;&gt; segments</span>
+<span class="sd">        [&#39;This is &#39;, &#39;a sample&#39;, &#39; line th&#39;, &#39;at we wa&#39;, &#39;nt to sp&#39;, &#39;lit.&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">line</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">field_width</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">),</span> <span class="n">field_width</span><span class="p">)]</span></div>
+
+
+
+<div class="viewcode-block" id="dataframe_to_date_format">
+<a class="viewcode-back" href="../../../api.html#cequalw2.fileio.dataframe_to_date_format">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">dataframe_to_date_format</span><span class="p">(</span><span class="n">year</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">data_frame</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert the day-of-year column in a CE-QUAL-W2 data frame to datetime objects.</span>
+
+<span class="sd">    :param year: The start year of the data.</span>
+<span class="sd">    :type year: int</span>
+<span class="sd">    :param data_frame: The data frame to convert.</span>
+<span class="sd">    :type data_frame: pd.DataFrame</span>
+<span class="sd">    :return: The data frame with the day-of-year column converted to datetime objects.</span>
+<span class="sd">    :rtype: pd.DataFrame</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">datetimes</span> <span class="o">=</span> <span class="n">w2_datetime</span><span class="o">.</span><span class="n">day_of_year_to_datetime</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">data_frame</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="n">data_frame</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">datetimes</span>
+    <span class="n">data_frame</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Date&#39;</span>
+    <span class="k">return</span> <span class="n">data_frame</span></div>
+
+
+
+<div class="viewcode-block" id="read_npt_opt">
+<a class="viewcode-back" href="../../../api.html#cequalw2.fileio.read_npt_opt">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_npt_opt</span><span class="p">(</span><span class="n">infile</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data_columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">skiprows</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read CE-QUAL-W2 time series (fixed-width format, *.npt files).</span>
+
+<span class="sd">    :param infile: The path to the time series file (*.npt or *.opt).</span>
+<span class="sd">    :type infile: str</span>
+<span class="sd">    :param data_columns: The names of the data columns.</span>
+<span class="sd">    :type data_columns: List[str]</span>
+<span class="sd">    :param skiprows: The number of header rows to skip. Defaults to 3.</span>
+<span class="sd">    :type skiprows: int, optional</span>
+<span class="sd">    :return: A DataFrame of the time series data read from the input file.</span>
+<span class="sd">    :rtype: pd.DataFrame</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># This function cannot trust that the file is actually in fixed-width format.</span>
+    <span class="c1"># Check if the first line after the header contains commas.</span>
+    <span class="c1"># If it is a CSV file, then call read_csv() instead.</span>
+
+    <span class="c1"># TODO: Add support for tabs and other delimiters. (LOW PRIORITY)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">skiprows</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+        <span class="k">if</span> <span class="s1">&#39;,&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">read_csv</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">data_columns</span><span class="o">=</span><span class="n">data_columns</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="n">skiprows</span><span class="p">)</span>
+
+    <span class="c1"># Parse the fixed-width file</span>
+
+    <span class="c1"># Number of columns to read, including the date/day column</span>
+    <span class="n">ncols_to_read</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_columns</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="n">columns_to_read</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;DoY&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">data_columns</span><span class="p">]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_fwf</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="n">skiprows</span><span class="p">,</span> <span class="n">widths</span><span class="o">=</span><span class="n">ncols_to_read</span><span class="o">*</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span>
+                         <span class="n">names</span><span class="o">=</span><span class="n">columns_to_read</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Error reading </span><span class="si">{</span><span class="n">infile</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">df</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Filename&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">infile</span>
+
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+
+<div class="viewcode-block" id="read_csv">
+<a class="viewcode-back" href="../../../api.html#cequalw2.fileio.read_csv">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_csv</span><span class="p">(</span><span class="n">infile</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data_columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">skiprows</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read CE-QUAL-W2 time series in CSV format.</span>
+
+<span class="sd">    :param infile: The path to the time series file (*.npt or *.opt).</span>
+<span class="sd">    :type infile: str</span>
+<span class="sd">    :param data_columns: The names of the data columns.</span>
+<span class="sd">    :type data_columns: List[str]</span>
+<span class="sd">    :param skiprows: The number of header rows to skip. Defaults to 3.</span>
+<span class="sd">    :type skiprows: int, optional</span>
+<span class="sd">    :return: A DataFrame of the time series data read from the input file.</span>
+<span class="sd">    :rtype: pd.DataFrame</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="n">skiprows</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">data_columns</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+        <span class="c1"># Handle trailing comma, which adds an extra (empty) column</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="n">skiprows</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="o">*</span><span class="n">data_columns</span><span class="p">,</span> <span class="s1">&#39;JUNK&#39;</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="s1">&#39;JUNK&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error reading &#39;</span> <span class="o">+</span> <span class="n">infile</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Trying again with an additional column&#39;</span><span class="p">)</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="n">skiprows</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="o">*</span><span class="n">data_columns</span><span class="p">,</span> <span class="s1">&#39;JUNK1&#39;</span><span class="p">,</span> <span class="s1">&#39;JUNK2&#39;</span><span class="p">],</span>
+                             <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;JUNK1&#39;</span><span class="p">,</span> <span class="s1">&#39;JUNK2&#39;</span><span class="p">])</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Error reading </span><span class="si">{</span><span class="n">infile</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">df</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Filename&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">infile</span>
+
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+
+<div class="viewcode-block" id="read_sqlite">
+<a class="viewcode-back" href="../../../api.html#cequalw2.fileio.read_sqlite">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_sqlite</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read an SQLite database file and return the contents of the first table as a Pandas DataFrame.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        file_path (str): The path to the SQLite database file.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: The contents of the first table in the SQLite database.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        sqlite3.OperationalError: If there is an error executing SQL queries.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Establish a connection to the SQLite database file</span>
+    <span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+
+    <span class="c1"># Create a cursor object to execute SQL queries</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+    <span class="c1"># Execute the SQL query to fetch table names</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT name FROM sqlite_master WHERE type=&#39;table&#39;&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Fetch all table names from the cursor as a list of tuples</span>
+    <span class="n">tables</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+    <span class="c1"># Fetch the name of the first (and only) table in the list</span>
+    <span class="n">table_name</span> <span class="o">=</span> <span class="n">tables</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Execute the SQL query to fetch all records from the table</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SELECT * FROM </span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Fetch all records from the cursor as a list of tuples</span>
+    <span class="n">records</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+    <span class="c1"># Get the column names from the cursor description</span>
+    <span class="n">column_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">description</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">description</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">description</span><span class="p">]</span>
+
+    <span class="c1"># Create a Pandas DataFrame from the records and column names</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">records</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">column_names</span><span class="p">)</span>
+
+    <span class="c1"># Convert the first column to Pandas date-time objects</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">column_names</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">column_names</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+    
+    <span class="c1"># Set the index to the date-time column</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">column_names</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Close the cursor and connection</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="c1"># Return the DataFrame</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+
+<div class="viewcode-block" id="read">
+<a class="viewcode-back" href="../../../api.html#cequalw2.fileio.read">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read CE-QUAL-W2 time series data in various formats and convert the Day of Year to date-time</span>
+<span class="sd">    format.</span>
+
+<span class="sd">    This function supports reading data from CSV (Comma Separated Values) files and fixed-width</span>
+<span class="sd">    format (npt/opt) files.  The file type can be explicitly specified using the `file_type`</span>
+<span class="sd">    keyword argument, or it can be inferred from the file extension. By default, the function</span>
+<span class="sd">    assumes a skiprows value of 3 for header rows.</span>
+
+<span class="sd">    :param args: Any number of positional arguments. The first argument should be the path to the</span>
+<span class="sd">                 input time series file. The second argument should be the start year of the</span>
+<span class="sd">                 simulation. The third argument (optional) should be the list of names of the data</span>
+<span class="sd">                 columns.</span>
+<span class="sd">    :param kwargs: Any number of keyword arguments.</span>
+<span class="sd">                   - skiprows: The number of header rows to skip. Defaults to 3.</span>
+<span class="sd">                   - file_type: The file type (CSV, npt, or opt). If not specified, it is</span>
+<span class="sd">                                determined from the file extension.</span>
+<span class="sd">    :raises ValueError: If the file type was not specified and could not be determined from the</span>
+<span class="sd">                        filename.</span>
+<span class="sd">    :raises ValueError: If an unrecognized file type is encountered. Valid file types are CSV, npt,</span>
+<span class="sd">                        and opt.</span>
+<span class="sd">    :return: A Pandas DataFrame containing the time series data with the Day of Year converted to</span>
+<span class="sd">             date format.</span>
+<span class="sd">    :rtype: pd.DataFrame</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Assign positional and keyword arguments to variables</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Exactly three arguments are required.&quot;</span><span class="p">)</span>
+
+    <span class="n">infile</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">data_columns</span> <span class="o">=</span> <span class="n">args</span>
+
+    <span class="c1"># Assign keywords to variables</span>
+    <span class="n">skiprows</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;skiprows&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">file_type</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;file_type&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># If not defined, set the file type using the input filename</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">file_type</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">infile</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.csv&#39;</span><span class="p">):</span>
+            <span class="n">file_type</span> <span class="o">=</span> <span class="n">FileType</span><span class="o">.</span><span class="n">CSV</span>
+        <span class="k">elif</span> <span class="n">infile</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.npt&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">infile</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.opt&#39;</span><span class="p">):</span>
+            <span class="n">file_type</span> <span class="o">=</span> <span class="n">FileType</span><span class="o">.</span><span class="n">FIXED_WIDTH</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s1">&#39;The file type was not specified, and it could not be determined from the filename.&#39;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;file_type:&#39;</span><span class="p">,</span> <span class="n">file_type</span><span class="p">)</span>
+
+    <span class="c1"># Read the data</span>
+    <span class="k">if</span> <span class="n">file_type</span> <span class="o">==</span> <span class="n">FileType</span><span class="o">.</span><span class="n">FIXED_WIDTH</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">read_npt_opt</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">data_columns</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="n">skiprows</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">file_type</span> <span class="o">==</span> <span class="n">FileType</span><span class="o">.</span><span class="n">CSV</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">read_csv</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">data_columns</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="n">skiprows</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unrecognized file type. Valid file types are CSV, npt, and opt.&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Convert day-of-year column of the data frames to date format</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">dataframe_to_date_format</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Filename&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">infile</span>
+
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+
+<div class="viewcode-block" id="read_met">
+<a class="viewcode-back" href="../../../api.html#cequalw2.fileio.read_met">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_met</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read meteorology time series.</span>
+
+<span class="sd">    :param args: Any number of positional arguments. The first argument should be the path to the</span>
+<span class="sd">                 input time series file.</span>
+<span class="sd">                 The second argument should be the start year of the simulation.</span>
+<span class="sd">    :param kwargs: Any number of keyword arguments.</span>
+<span class="sd">                   - skiprows: The number of header rows to skip. Defaults to 3.</span>
+<span class="sd">                   - file_type: The file type (CSV, npt, or opt). If not specified, it is</span>
+<span class="sd">                                determined from the file extension.</span>
+<span class="sd">    :return: Dataframe of the time series in the input file.</span>
+<span class="sd">    :rtype: pd.DataFrame</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Assign positional and keyword arguments to variables</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Exactly two arguments are required.&quot;</span><span class="p">)</span>
+
+    <span class="n">infile</span><span class="p">,</span> <span class="n">year</span> <span class="o">=</span> <span class="n">args</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;data_columns&#39;</span><span class="p">):</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;data_columns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;Air Temperature ($^oC$)&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Dew Point Temperature ($^oC$)&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Wind Speed (m/s)&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Wind Direction (radians)&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Cloudiness (fraction)&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Solar Radiation ($W/m^2$)&#39;</span>
+        <span class="p">]</span>
+    <span class="n">data_columns</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;data_columns&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">read</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">data_columns</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="read_excel">
+<a class="viewcode-back" href="../../../api.html#cequalw2.fileio.read_excel">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_excel</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read CE-QUAL-W2 time series from an Excel file.</span>
+
+<span class="sd">    :param file_path: The path to the Excel file.</span>
+<span class="sd">    :type file_path: str</span>
+<span class="sd">    :return: Dataframe of the time series in the input file.</span>
+<span class="sd">    :rtype: pd.DataFrame</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Get keyword arguments</span>
+    <span class="n">skiprows</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;skiprows&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="n">skiprows</span><span class="p">)</span>
+    <span class="n">first_column_name</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">first_column_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">:</span> <span class="s1">&#39;Date&#39;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%m/</span><span class="si">%d</span><span class="s1">/%Y %H:%M&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+
+<div class="viewcode-block" id="write_hdf">
+<a class="viewcode-back" href="../../../api.html#cequalw2.fileio.write_hdf">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">write_hdf</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">outfile</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Write CE-QUAL-W2 timeseries dataframe to HDF5</span>
+
+<span class="sd">    The index column must be a datetime array.</span>
+<span class="sd">    This column will be written to HDF5 as a string array.</span>
+<span class="sd">    Each data column will be written using its data type.</span>
+
+<span class="sd">    :param df: The DataFrame containing the timeseries data.</span>
+<span class="sd">    :type df: pd.DataFrame</span>
+<span class="sd">    :param group: The HDF5 group where the data will be stored.</span>
+<span class="sd">    :type group: str</span>
+<span class="sd">    :param outfile: The output HDF5 file path.</span>
+<span class="sd">    :type outfile: str</span>
+<span class="sd">    :param overwrite: Whether to overwrite existing data in HDF5. Defaults to True.</span>
+<span class="sd">    :type overwrite: bool, optional</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;str&#39;</span><span class="p">)</span>
+        <span class="n">string_dt</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">special_dtype</span><span class="p">(</span><span class="n">vlen</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+        <span class="n">date_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">group</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="k">if</span> <span class="n">overwrite</span> <span class="ow">and</span> <span class="p">(</span><span class="n">date_path</span> <span class="ow">in</span> <span class="n">f</span><span class="p">):</span>
+            <span class="k">del</span> <span class="n">f</span><span class="p">[</span><span class="n">date_path</span><span class="p">]</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="n">date_path</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">string_dt</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">ts_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">group</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="k">if</span> <span class="n">overwrite</span> <span class="ow">and</span> <span class="p">(</span><span class="n">ts_path</span> <span class="ow">in</span> <span class="n">f</span><span class="p">):</span>
+                <span class="k">del</span> <span class="n">f</span><span class="p">[</span><span class="n">ts_path</span><span class="p">]</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="n">ts_path</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">])</span></div>
+
+
+
+<div class="viewcode-block" id="read_hdf">
+<a class="viewcode-back" href="../../../api.html#cequalw2.fileio.read_hdf">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_hdf</span><span class="p">(</span><span class="n">group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">infile</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">variables</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read CE-QUAL-W2 timeseries from HDF5 and create a dataframe.</span>
+
+<span class="sd">    This function assumes that a string-based datetime array named Date is present.</span>
+<span class="sd">    This will be read and assigned as the index column of the output pandas dataframe,</span>
+<span class="sd">    which will be a datetime array.</span>
+
+<span class="sd">    :param group: The group within the HDF5 file containing the time series data.</span>
+<span class="sd">    :type group: str</span>
+<span class="sd">    :param infile: The path to the HDF5 file.</span>
+<span class="sd">    :type infile: str</span>
+<span class="sd">    :param variables: A list of variable names to read from the HDF5 file.</span>
+<span class="sd">    :type variables: List[str]</span>
+
+<span class="sd">    :return: Dataframe containing the time series data.</span>
+<span class="sd">    :rtype: pd.DataFrame</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="c1"># Read dates</span>
+        <span class="n">date_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">group</span><span class="si">}</span><span class="s1">/Date&#39;</span>
+        <span class="n">dates_str</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">date_path</span><span class="p">)</span>
+
+        <span class="c1"># Read time series data</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
+            <span class="n">ts_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">group</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">variable</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="n">ts</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ts_path</span><span class="p">)</span>
+
+        <span class="n">dates</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">dstr</span> <span class="ow">in</span> <span class="n">dates_str</span><span class="p">:</span>
+            <span class="n">dstr</span> <span class="o">=</span> <span class="n">dstr</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+            <span class="n">dt</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">dstr</span><span class="p">)</span>
+            <span class="n">dates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">dates</span><span class="p">)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;Filename&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">infile</span>
+
+        <span class="k">return</span> <span class="n">df</span></div>
+
+
+
+<div class="viewcode-block" id="read_plot_control">
+<a class="viewcode-back" href="../../../api.html#cequalw2.fileio.read_plot_control">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_plot_control</span><span class="p">(</span><span class="n">yaml_infile</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">index_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;item&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read CE-QUAL-W2 plot control file in YAML format.</span>
+
+<span class="sd">    :param yaml_infile: Path to the YAML file.</span>
+<span class="sd">    :type yaml_infile: str</span>
+<span class="sd">    :param index_name: Name of the column to be set as the index in the resulting DataFrame.</span>
+<span class="sd">                       Defaults to &#39;item&#39;.</span>
+<span class="sd">    :type index_name: str</span>
+
+<span class="sd">    :return: DataFrame containing the contents of the plot control file.</span>
+<span class="sd">    :rtype: pd.DataFrame</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">yaml_infile</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">yaml_file</span><span class="p">:</span>
+        <span class="n">yaml_contents</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">yaml_file</span><span class="p">,</span> <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="o">.</span><span class="n">SafeLoader</span><span class="p">)</span>
+        <span class="n">control_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">json_normalize</span><span class="p">(</span><span class="n">yaml_contents</span><span class="p">)</span>
+        <span class="n">control_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">control_df</span><span class="p">[</span><span class="n">index_name</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">control_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">index_name</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">control_df</span></div>
+
+
+
+<div class="viewcode-block" id="write_plot_control">
+<a class="viewcode-back" href="../../../api.html#cequalw2.fileio.write_plot_control">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">write_plot_control</span><span class="p">(</span><span class="n">control_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">yaml_outfile</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Write CE-QUAL-W2 plot control file in YAML format.</span>
+
+<span class="sd">    :param control_df: DataFrame containing the plot control data.</span>
+<span class="sd">    :type control_df: pd.DataFrame</span>
+<span class="sd">    :param yaml_outfile: Path to the output YAML file.</span>
+<span class="sd">    :type yaml_outfile: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">control_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;records&#39;</span><span class="p">),</span>
+                     <span class="n">sort_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">default_flow_style</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">yaml_outfile</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Todd E. Steissberg, PhD, PE.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
